@@ -1,7 +1,6 @@
 package com.smartrwanda.tourism.service;
 
-import com.smartrwanda.tourism.dto.request.*;
-import com.smartrwanda.tourism.dto.response.AuthResponse;
+import com.smartrwanda.tourism.dto.*;
 
 public interface AuthenticationService {
     AuthResponse register(RegisterRequest request);
