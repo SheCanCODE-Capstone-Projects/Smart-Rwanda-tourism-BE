@@ -25,14 +25,14 @@ public class User extends BaseEntity {
     @Column(name = "last_name", nullable = false)
     private String lastName;
 
-    @Column(nullable = false, unique = true)
+    @Column(name = "email", nullable = false, unique = true)
     private String email;
 
-    @Column(nullable = false)
+    @Column(name = "password", nullable = false)
     private String password;
 
     @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
+    @Column(name = "role", nullable = false)
     private Role role;
 
     @Enumerated(EnumType.STRING)
@@ -50,10 +50,4 @@ public class User extends BaseEntity {
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<PasswordResetToken> resetTokens = new ArrayList<>();
-
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<Reservation> reservations = new ArrayList<>();
-
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<Review> reviews = new ArrayList<>();
 }
