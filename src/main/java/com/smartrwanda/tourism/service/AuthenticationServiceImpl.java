@@ -1,7 +1,6 @@
 package com.smartrwanda.tourism.service;
 
-import com.smartrwanda.tourism.dto.request.*;
-import com.smartrwanda.tourism.dto.response.AuthResponse;
+import com.smartrwanda.tourism.dto.*;
 import com.smartrwanda.tourism.entity.AuthProvider;
 import com.smartrwanda.tourism.entity.PasswordResetToken;
 import com.smartrwanda.tourism.entity.User;
@@ -10,7 +9,6 @@ import com.smartrwanda.tourism.exception.ResourceNotFoundException;
 import com.smartrwanda.tourism.repository.PasswordResetTokenRepository;
 import com.smartrwanda.tourism.repository.UserRepository;
 import com.smartrwanda.tourism.security.JwtService;
-import com.smartrwanda.tourism.service.AuthenticationService;
 import com.smartrwanda.tourism.validator.EmailValidator;
 import com.smartrwanda.tourism.validator.PasswordValidator;
 import lombok.RequiredArgsConstructor;
@@ -41,9 +39,11 @@ public class AuthenticationServiceImpl implements AuthenticationService {
         if (!passwordValidator.isValid(request.getPassword())) {
             throw new BadRequestException("Password does not meet security requirements");
         }
+        
         if (userRepository.existsByEmail(request.getEmail())) {
             throw new BadRequestException("Email already registered");
         }
+        
         User user = new User();
         user.setFirstName(request.getFirstName());
         user.setLastName(request.getLastName());
@@ -90,12 +90,19 @@ public class AuthenticationServiceImpl implements AuthenticationService {
     }
 
     @Override
+    public AuthResponse googleLogin(GoogleLoginRequest request) {
+       
+        throw new UnsupportedOperationException("Google login not yet implemented");
+    }
+
+    @Override
     @Transactional
     public void forgotPassword(ForgotPasswordRequest request) {
         User user = userRepository.findByEmail(request.getEmail())
                 .orElseThrow(() -> new ResourceNotFoundException("User not found"));
 
-        passwordResetTokenRepository.deleteByUser_Id(user.getId());
+      r
+        passwordResetTokenRepository.deleteByUser(user);
 
         String token = UUID.randomUUID().toString();
         PasswordResetToken resetToken = new PasswordResetToken();
@@ -112,7 +119,6 @@ public class AuthenticationServiceImpl implements AuthenticationService {
     @Override
     @Transactional
     public void resetPassword(ResetPasswordRequest request) {
-        // Validate password strength
         if (!passwordValidator.isValid(request.getNewPassword())) {
             throw new BadRequestException("Password does not meet security requirements");
         }
@@ -129,5 +135,17 @@ public class AuthenticationServiceImpl implements AuthenticationService {
         userRepository.save(user);
 
         passwordResetTokenRepository.delete(resetToken);
+    }
+
+    @Override
+    public void logout(String token) {
+       
+        System.out.println("Logout successful for token: " + token.substring(0, 20) + "...");
+    }
+
+    @Override
+    public UserResponse getCurrentUser() {
+  
+        throw new UnsupportedOperationException("Not yet implemented");
     }
 }
