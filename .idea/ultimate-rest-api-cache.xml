@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="UltimateRestApiCache">
+    <cachedApis>
+      <api method="POST" url="/api/auth/register" className="com.smartrwanda.tourism.controller.AuthenticationController" methodName="register" moduleName="tourism">
+        <params>
+          <param name="body" value="{&#13;&#10;  &quot;firstName&quot; : &quot;&quot;,&#13;&#10;  &quot;lastName&quot; : &quot;&quot;,&#13;&#10;  &quot;email&quot; : &quot;&quot;,&#13;&#10;  &quot;password&quot; : &quot;&quot;,&#13;&#10;  &quot;role&quot; : &quot;TOURIST&quot;&#13;&#10;}" type="BODY" dataType="RegisterRequest" />
+        </params>
+      </api>
+      <api method="POST" url="/api/auth/login" className="com.smartrwanda.tourism.controller.AuthenticationController" methodName="login" moduleName="tourism">
+        <params>
+          <param name="body" value="{&#13;&#10;  &quot;email&quot; : &quot;&quot;,&#13;&#10;  &quot;password&quot; : &quot;&quot;&#13;&#10;}" type="BODY" dataType="LoginRequest" />
+        </params>
+      </api>
+      <api method="POST" url="/api/auth/google" className="com.smartrwanda.tourism.controller.AuthenticationController" methodName="googleLogin" moduleName="tourism">
+        <params>
+          <param name="body" value="{&#13;&#10;  &quot;idToken&quot; : &quot;&quot;&#13;&#10;}" type="BODY" dataType="GoogleLoginRequest" />
+        </params>
+      </api>
+      <api method="POST" url="/api/auth/forgot-password" className="com.smartrwanda.tourism.controller.AuthenticationController" methodName="forgotPassword" moduleName="tourism">
+        <params>
+          <param name="body" value="{&#13;&#10;  &quot;email&quot; : &quot;&quot;&#13;&#10;}" type="BODY" dataType="ForgotPasswordRequest" />
+        </params>
+      </api>
+      <api method="POST" url="/api/auth/reset-password" className="com.smartrwanda.tourism.controller.AuthenticationController" methodName="resetPassword" moduleName="tourism">
+        <params>
+          <param name="body" value="{&#13;&#10;  &quot;token&quot; : &quot;&quot;,&#13;&#10;  &quot;newPassword&quot; : &quot;&quot;&#13;&#10;}" type="BODY" dataType="ResetPasswordRequest" />
+        </params>
+      </api>
+      <api method="POST" url="/api/auth/logout" className="com.smartrwanda.tourism.controller.AuthenticationController" methodName="logout" moduleName="tourism">
+        <params>
+          <param name="token" value="" type="QUERY" dataType="String" />
+        </params>
+      </api>
+      <api method="GET" url="/api/auth/me" className="com.smartrwanda.tourism.controller.AuthenticationController" methodName="getCurrentUser" moduleName="tourism" />
+    </cachedApis>
+  </component>
+</project>

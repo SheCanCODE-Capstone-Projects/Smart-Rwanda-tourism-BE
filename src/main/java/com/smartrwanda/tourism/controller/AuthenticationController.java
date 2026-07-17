@@ -58,6 +58,7 @@ public class AuthenticationController {
         return ResponseEntity.ok(ApiResponse.success("Password reset successfully", null));
     }
 
+
     @PostMapping("/logout")
     public ResponseEntity<ApiResponse<Void>> logout(
             @RequestHeader("Authorization") String token) {

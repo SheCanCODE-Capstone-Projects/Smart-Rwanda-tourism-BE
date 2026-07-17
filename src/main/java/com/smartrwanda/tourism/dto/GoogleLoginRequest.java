@@ -8,5 +8,5 @@ import lombok.Setter;
 @Setter
 public class GoogleLoginRequest {
     @NotBlank
-    private String idToken; // Google ID token from frontend, verified server-side
+    private String idToken;
 }

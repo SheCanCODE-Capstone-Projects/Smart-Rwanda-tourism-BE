@@ -1,5 +1,6 @@
 package com.smartrwanda.tourism.dto;
 
+import com.smartrwanda.tourism.entity.Role;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
@@ -9,5 +10,8 @@ import lombok.Setter;
 @Builder
 public class AuthResponse {
     private String token;
-    private UserResponse user;
+    private String email;
+    private Role role;
+    private String firstName;
+    private String lastName;
 }

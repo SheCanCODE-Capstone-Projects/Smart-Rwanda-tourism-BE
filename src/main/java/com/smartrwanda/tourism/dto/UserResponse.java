@@ -1,9 +1,9 @@
 package com.smartrwanda.tourism.dto;
 
+import com.smartrwanda.tourism.entity.Role;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
-import org.springframework.context.annotation.Role;
 
 import java.time.LocalDateTime;
 
