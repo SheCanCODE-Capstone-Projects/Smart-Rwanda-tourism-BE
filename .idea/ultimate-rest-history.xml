@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="UltimateRestHistory">
+    <items>
+      <historyItem>
+        <option name="timestamp" value="1784209631042" />
+        <request method="POST" url="http://localhost:8080/api/auth/logout">
+          <params>
+            <param name="token" value="" type="QUERY" dataType="String" />
+          </params>
+          <headers>
+            <param name="Authorization" value="" type="HEADER" dataType="String" />
+          </headers>
+        </request>
+      </historyItem>
+      <historyItem>
+        <option name="timestamp" value="1784209627274" />
+        <request method="POST" url="http://localhost:8080/api/auth/logout">
+          <params>
+            <param name="token" value="" type="QUERY" dataType="String" />
+          </params>
+          <headers>
+            <param name="Authorization" value="" type="HEADER" dataType="String" />
+          </headers>
+        </request>
+      </historyItem>
+      <historyItem>
+        <option name="timestamp" value="1784209079561" />
+        <request method="POST" url="http://localhost:8080/api/auth/reset-password">
+          <bodyContent>{
+  &quot;token&quot; : &quot; eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiVE9VUklTVCIsInN1YiI6ImluZ2FiaXJlY2hhZGlhMjAwM0BnbWFpbC5jb20iLCJpYXQiOjE3ODQyMDgyMTIsImV4cCI6MTc4NDI5NDYxMn0.rWL-ZKWBpcGtz_BxJu_RYHLm4tcpLLb1CMQNk68l0cY&quot;,
+  &quot;newPassword&quot; : &quot;@12345678Chadia&quot;
+}</bodyContent>
+        </request>
+      </historyItem>
+      <historyItem>
+        <option name="timestamp" value="1784209037446" />
+        <request method="POST" url="http://localhost:8080/api/auth/logout">
+          <params>
+            <param name="token" value="" type="QUERY" dataType="String" />
+          </params>
+          <headers>
+            <param name="Authorization" value="" type="HEADER" dataType="String" />
+          </headers>
+        </request>
+      </historyItem>
+      <historyItem>
+        <option name="timestamp" value="1784208777940" />
+        <request method="POST" url="http://localhost:8080/api/auth/logout">
+          <bodyContent>curl -X POST http://localhost:8080/api/auth/logout -H &quot;Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiVE9VUklTVCIsInN1YiI6ImluZ2FiaXJlY2hhZGlhMjAwM0BnbWFpbC5jb20iLCJpYXQiOjE3ODQyMDgyMTIsImV4cCI6MTc4NDI5NDYxMn0.rWL-ZKWBpcGtz_BxJu_RYHLm4tcpLLb1CMQNk68l0cY&quot;</bodyContent>
+          <params>
+            <param name="token" value="" type="QUERY" dataType="String" />
+          </params>
+        </request>
+      </historyItem>
+      <historyItem>
+        <option name="timestamp" value="1784205248918" />
+        <request method="POST" url="http://localhost:8080/api/auth/register">
+          <bodyContent>{
+  &quot;firstName&quot; : &quot;Chadia&quot;,
+  &quot;lastName&quot; : &quot;Ingabire&quot;,
+  &quot;email&quot; : &quot;ingabirechadia2003@gmail.com&quot;,
+  &quot;password&quot; : &quot;@12345Chadia&quot;,
+  &quot;role&quot; : &quot;TOURIST&quot;
+}</bodyContent>
+        </request>
+      </historyItem>
+      <historyItem>
+        <option name="timestamp" value="1784205202776" />
+        <request method="POST" url="http://localhost:8080/api/auth/register">
+          <bodyContent>{
+  &quot;firstName&quot;: &quot;Chadia&quot;,
+  &quot;lastName&quot;: &quot;Ingabire&quot;,
+  &quot;email&quot;: &quot;ingabirechadia2003@gmail.com&quot;,
+  &quot;password&quot;: &quot;@12345Chadia&quot;,
+  &quot;role&quot;: &quot;TOURIST&quot;
+}</bodyContent>
+        </request>
+      </historyItem>
+    </items>
+  </component>
+</project>

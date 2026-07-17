@@ -12,6 +12,8 @@ import com.smartrwanda.tourism.security.JwtService;
 import com.smartrwanda.tourism.validator.EmailValidator;
 import com.smartrwanda.tourism.validator.PasswordValidator;
 import lombok.RequiredArgsConstructor;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -29,6 +31,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
     private final JwtService jwtService;
     private final EmailValidator emailValidator;
     private final PasswordValidator passwordValidator;
+    private final JavaMailSender mailSender;
 
     @Override
     public AuthResponse register(RegisterRequest request) {
@@ -39,11 +42,11 @@ public class AuthenticationServiceImpl implements AuthenticationService {
         if (!passwordValidator.isValid(request.getPassword())) {
             throw new BadRequestException("Password does not meet security requirements");
         }
-        
+
         if (userRepository.existsByEmail(request.getEmail())) {
             throw new BadRequestException("Email already registered");
         }
-        
+
         User user = new User();
         user.setFirstName(request.getFirstName());
         user.setLastName(request.getLastName());
@@ -53,6 +56,9 @@ public class AuthenticationServiceImpl implements AuthenticationService {
         user.setAuthProvider(AuthProvider.LOCAL);
 
         User savedUser = userRepository.save(user);
+
+
+        sendWelcomeEmail(savedUser.getEmail(), savedUser.getFirstName());
 
         String token = jwtService.generateToken(savedUser);
 
@@ -91,7 +97,6 @@ public class AuthenticationServiceImpl implements AuthenticationService {
 
     @Override
     public AuthResponse googleLogin(GoogleLoginRequest request) {
-       
         throw new UnsupportedOperationException("Google login not yet implemented");
     }
 
@@ -101,7 +106,6 @@ public class AuthenticationServiceImpl implements AuthenticationService {
         User user = userRepository.findByEmail(request.getEmail())
                 .orElseThrow(() -> new ResourceNotFoundException("User not found"));
 
-      r
         passwordResetTokenRepository.deleteByUser(user);
 
         String token = UUID.randomUUID().toString();
@@ -112,6 +116,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
 
         passwordResetTokenRepository.save(resetToken);
 
+        sendPasswordResetEmail(user.getEmail(), token);
 
         System.out.println("Reset token for " + user.getEmail() + ": " + token);
     }
@@ -139,13 +144,60 @@ public class AuthenticationServiceImpl implements AuthenticationService {
 
     @Override
     public void logout(String token) {
-       
-        System.out.println("Logout successful for token: " + token.substring(0, 20) + "...");
+        System.out.println("Logout successful for token: " + token.substring(0, Math.min(20, token.length())) + "...");
     }
 
     @Override
     public UserResponse getCurrentUser() {
-  
         throw new UnsupportedOperationException("Not yet implemented");
+    }
+
+
+
+    private void sendPasswordResetEmail(String to, String token) {
+        try {
+            String resetUrl = "http://localhost:8080/api/auth/reset-password?token=" + token;
+
+            SimpleMailMessage message = new SimpleMailMessage();
+            message.setTo(to);
+            message.setSubject(" Password Reset Request - RwandaWays");
+            message.setText("Hello,\n\n" +
+                    "We received a request to reset your password for your RwandaWays account.\n\n" +
+                    "Please click the link below to reset your password:\n" +
+                    resetUrl + "\n\n" +
+                    "This link will expire in 24 hours.\n\n" +
+                    "If you did not request this, please ignore this email.\n\n" +
+                    "Best regards,\n" +
+                    "RwandaWays Team");
+
+            mailSender.send(message);
+            System.out.println(" Password reset email sent to: " + to);
+        } catch (Exception e) {
+            System.out.println(" Failed to send email to: " + to + " - " + e.getMessage());
+        }
+    }
+
+    private void sendWelcomeEmail(String to, String firstName) {
+        try {
+            SimpleMailMessage message = new SimpleMailMessage();
+            message.setTo(to);
+            message.setSubject(" Welcome to RwandaWays!");
+            message.setText("Hello " + firstName + ",\n\n" +
+                    "Thank you for registering with RwandaWays! \n\n" +
+                    "We're excited to have you on board. With your account, you can:\n" +
+                    " Discover amazing tourist attractions in Rwanda\n" +
+                    " Book hotels, tours, and activities\n" +
+                    " Plan your perfect trip\n" +
+                    " Connect with verified service providers\n\n" +
+                    "Start exploring now: http://localhost:3000/login\n\n" +
+                    "If you have any questions, feel free to reply to this email.\n\n" +
+                    "Best regards,\n" +
+                    "RwandaWays Team 🌍");
+
+            mailSender.send(message);
+            System.out.println(" Welcome email sent to: " + to);
+        } catch (Exception e) {
+            System.out.println(" Failed to send welcome email to: " + to + " - " + e.getMessage());
+        }
     }
 }

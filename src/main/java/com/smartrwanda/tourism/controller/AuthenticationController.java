@@ -1,12 +1,6 @@
 package com.smartrwanda.tourism.controller;
 
-import com.smartrwanda.tourism.dto.ForgotPasswordRequest;
-import com.smartrwanda.tourism.dto.GoogleLoginRequest;
-import com.smartrwanda.tourism.dto.LoginRequest;
-import com.smartrwanda.tourism.dto.RegisterRequest;
-import com.smartrwanda.tourism.dto.ResetPasswordRequest;
-import com.smartrwanda.tourism.dto.AuthResponse;
-import com.smartrwanda.tourism.dto.UserResponse;
+import com.smartrwanda.tourism.dto.*;
 import com.smartrwanda.tourism.common.ApiResponse;
 import com.smartrwanda.tourism.service.AuthenticationService;
 import jakarta.validation.Valid;
@@ -57,6 +51,7 @@ public class AuthenticationController {
         authenticationService.resetPassword(request);
         return ResponseEntity.ok(ApiResponse.success("Password reset successfully", null));
     }
+
 
     @PostMapping("/logout")
     public ResponseEntity<ApiResponse<Void>> logout(
