@@ -1,4 +1,6 @@
 package com.smartrwanda.tourism.entity;
 
-public class MoveSubCategory {
+public enum MoveSubCategory {
+    CAR_RENTAL,
+    TOURING_AGENCY
 }

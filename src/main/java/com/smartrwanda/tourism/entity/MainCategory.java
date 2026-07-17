@@ -1,4 +1,8 @@
 package com.smartrwanda.tourism.entity;
 
-public class MainCategory {
+public enum MainCategory {
+    STAY,
+    MOVE,
+    DINE,
+    EXPLORE
 }

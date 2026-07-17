@@ -1,4 +1,8 @@
 package com.smartrwanda.tourism.entity;
 
-public class StaySubCategory {
+public enum StaySubCategory {
+    HOTEL,
+    MOTEL,
+    LODGE,
+    APARTMENT
 }

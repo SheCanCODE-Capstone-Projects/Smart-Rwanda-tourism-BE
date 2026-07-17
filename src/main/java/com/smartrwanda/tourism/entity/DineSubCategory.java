@@ -1,4 +1,5 @@
 package com.smartrwanda.tourism.entity;
 
-public class DineSubCategory {
+public enum DineSubCategory {
+    RESTAURANT
 }
