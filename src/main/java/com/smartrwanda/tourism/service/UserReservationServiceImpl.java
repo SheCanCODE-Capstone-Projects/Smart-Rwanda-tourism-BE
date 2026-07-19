@@ -54,9 +54,7 @@ public class UserReservationServiceImpl implements UserReservationService {
         ProviderCategory category = provider.getCategory();
 
         switch (category) {
-            // ============================================================
-            // STAY (Hotels, Motels, Apartments)
-            // ============================================================
+           
             case HOTEL:
             case MOTEL:
             case APARTMENT:
