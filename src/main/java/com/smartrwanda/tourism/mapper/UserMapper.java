@@ -1,6 +1,6 @@
 package com.smartrwanda.tourism.mapper;
 
-import com.smartrwanda.tourism.dto.UserResponse;
+import com.smartrwanda.tourism.dto.response.UserResponse;
 import org.mapstruct.Mapper;
 import org.springframework.security.core.userdetails.User;
 

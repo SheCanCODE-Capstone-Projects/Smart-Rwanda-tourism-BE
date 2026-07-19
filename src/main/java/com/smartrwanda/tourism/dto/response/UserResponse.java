@@ -1,4 +1,4 @@
-package com.smartrwanda.tourism.dto;
+package com.smartrwanda.tourism.dto.response;
 
 import com.smartrwanda.tourism.entity.Role;
 import lombok.Builder;

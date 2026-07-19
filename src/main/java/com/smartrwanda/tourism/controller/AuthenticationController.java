@@ -1,12 +1,12 @@
 package com.smartrwanda.tourism.controller;
 
-import com.smartrwanda.tourism.dto.ForgotPasswordRequest;
-import com.smartrwanda.tourism.dto.GoogleLoginRequest;
-import com.smartrwanda.tourism.dto.LoginRequest;
-import com.smartrwanda.tourism.dto.RegisterRequest;
-import com.smartrwanda.tourism.dto.ResetPasswordRequest;
-import com.smartrwanda.tourism.dto.AuthResponse;
-import com.smartrwanda.tourism.dto.UserResponse;
+import com.smartrwanda.tourism.dto.request.ForgotPasswordRequest;
+import com.smartrwanda.tourism.dto.request.GoogleLoginRequest;
+import com.smartrwanda.tourism.dto.request.LoginRequest;
+import com.smartrwanda.tourism.dto.request.RegisterRequest;
+import com.smartrwanda.tourism.dto.request.ResetPasswordRequest;
+import com.smartrwanda.tourism.dto.response.AuthResponse;
+import com.smartrwanda.tourism.dto.response.UserResponse;
 import com.smartrwanda.tourism.common.ApiResponse;
 import com.smartrwanda.tourism.service.AuthenticationService;
 import jakarta.validation.Valid;

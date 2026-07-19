@@ -2,9 +2,9 @@ spring:
   application:
     name: smart-rwanda-tourism
   datasource:
-    url: ${SPRING_DATASOURCE_URL}
-    username: ${SPRING_DATASOURCE_USERNAME}
-    password: ${SPRING_DATASOURCE_PASSWORD}
+    url: jdbc:postgresql://localhost:5432/smart_rwanda_tourism
+    username: postgres
+    password: Divine!1
   jpa:
     hibernate:
       ddl-auto: update
@@ -34,8 +34,8 @@ server:
 
 
 jwt:
-  secret: ${JWT_SECRET}
-  expiration: ${JWT_EXPIRATION}
+  secret: ${JWT_SECRET:404E635266556A586E3272357538782F413F4428472B4B6250645367566B5970}
+  expiration: ${JWT_EXPIRATION:86400000}
 
 
 logging:
