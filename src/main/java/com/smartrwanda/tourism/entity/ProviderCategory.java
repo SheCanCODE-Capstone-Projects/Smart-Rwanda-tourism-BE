@@ -1,5 +1,13 @@
 package com.smartrwanda.tourism.entity;
 
 public enum ProviderCategory {
-    HOTEL, TOUR_AGENCY, TOUR_GUIDE, RESTAURANT, CAR_RENTAL
+    HOTEL,
+    MOTEL,
+    APARTMENT,
+    CAR_RENTAL,
+    TOUR_AGENCY,
+    TOUR_GUIDE,
+    RESTAURANT,
+    ATTRACTION
+
 }
