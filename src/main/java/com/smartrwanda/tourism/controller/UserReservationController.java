@@ -74,7 +74,6 @@ public class UserReservationController {
     }
 
     private Long getCurrentUserId(String token) {
-        // TODO: Extract userId from JWT token
         return 1L;
     }
 }

@@ -24,10 +24,6 @@ public class Reservation extends BaseEntity {
     @JoinColumn(name = "provider_id", nullable = false)
     private Provider provider;
 
-    // ============================================================
-    // Common Fields
-    // ============================================================
-
     @Column(name = "reservation_date", nullable = false)
     private LocalDateTime reservationDate;
 
@@ -41,9 +37,6 @@ public class Reservation extends BaseEntity {
     @Column(name = "confirmation_code", unique = true)
     private String confirmationCode;
 
-    // ============================================================
-    // Guest Information
-    // ============================================================
 
     @Column(name = "guest_name", nullable = false)
     private String guestName;
@@ -54,9 +47,7 @@ public class Reservation extends BaseEntity {
     @Column(name = "guest_phone")
     private String guestPhone;
 
-    // ============================================================
-    // Pricing
-    // ============================================================
+
 
     @Column(name = "total_price")
     private Double totalPrice;
@@ -64,9 +55,6 @@ public class Reservation extends BaseEntity {
     @Column(name = "currency")
     private String currency = "RWF";
 
-    // ============================================================
-    // STAY (Hotels, Motels, Apartments)
-    // ============================================================
 
     @Column(name = "check_in_date")
     private LocalDateTime checkInDate;
@@ -80,9 +68,6 @@ public class Reservation extends BaseEntity {
     @Column(name = "room_type")
     private String roomType;
 
-    // ============================================================
-    // MOVE (Car Rentals)
-    // ============================================================
 
     @Column(name = "pickup_date")
     private LocalDateTime pickupDate;
@@ -93,9 +78,6 @@ public class Reservation extends BaseEntity {
     @Column(name = "vehicle_type")
     private String vehicleType;
 
-    // ============================================================
-    // TOURS (Touring Agencies)
-    // ============================================================
 
     @Column(name = "tour_date")
     private LocalDateTime tourDate;
@@ -106,9 +88,6 @@ public class Reservation extends BaseEntity {
     @Column(name = "number_of_people")
     private Integer numberOfPeople;
 
-    // ============================================================
-    // ATTRACTIONS (Places to Visit)
-    // ============================================================
 
     @Column(name = "visit_date")
     private LocalDateTime visitDate;
@@ -116,9 +95,6 @@ public class Reservation extends BaseEntity {
     @Column(name = "number_of_visitors")
     private Integer numberOfVisitors;
 
-    // ============================================================
-    // Timestamps
-    // ============================================================
 
     @Column(name = "cancelled_at")
     private LocalDateTime cancelledAt;

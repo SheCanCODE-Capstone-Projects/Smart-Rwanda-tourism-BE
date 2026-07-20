@@ -5,6 +5,7 @@ import com.smartrwanda.tourism.entity.ProviderCategory;
 import com.smartrwanda.tourism.entity.VerificationStatus;
 import org.springframework.data.jpa.repository.JpaRepository;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -14,4 +15,6 @@ public interface ProviderRepository extends JpaRepository<Provider, Long> {
     List<Provider> findByVerificationStatus(VerificationStatus status);
     List<Provider> findByLocationContainingIgnoreCase(String location);
     long countByVerificationStatus(VerificationStatus status);
+
+    List<Provider> findByBusinessNameContainingIgnoreCase(String keyword);
 }

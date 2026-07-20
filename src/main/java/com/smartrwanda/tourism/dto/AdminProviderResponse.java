@@ -9,14 +9,13 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
-import java.util.List;
 
 @Getter
 @Setter
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class ProviderResponse {
+public class AdminProviderResponse {
 
     private Long id;
     private String businessName;
@@ -31,13 +30,12 @@ public class ProviderResponse {
     private String coverImageUrl;
     private Double averageRating;
     private Integer totalReviews;
-    private String openingHours;
     private Boolean isActive;
     private Long userId;
     private String ownerName;
     private String ownerEmail;
-    private Integer serviceCount;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
-    private List<String> imageUrls;
+    private Long totalBookings;
+    private Long totalServices;
 }
