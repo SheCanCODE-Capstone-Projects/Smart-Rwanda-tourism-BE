@@ -10,4 +10,8 @@ public enum ProviderCategory {
     RESTAURANT,
     ATTRACTION
 
+
 }
+
+
+
