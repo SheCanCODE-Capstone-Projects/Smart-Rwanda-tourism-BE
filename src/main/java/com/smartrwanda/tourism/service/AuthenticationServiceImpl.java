@@ -6,10 +6,14 @@ import com.smartrwanda.tourism.dto.response.UserResponse;
 import com.smartrwanda.tourism.entity.AuthProvider;
 import com.smartrwanda.tourism.entity.PasswordResetToken;
 import com.smartrwanda.tourism.entity.User;
+import com.smartrwanda.tourism.entity.UserProfile;
+import com.smartrwanda.tourism.entity.UserPreference;
 import com.smartrwanda.tourism.exception.BadRequestException;
 import com.smartrwanda.tourism.exception.ResourceNotFoundException;
 import com.smartrwanda.tourism.repository.PasswordResetTokenRepository;
 import com.smartrwanda.tourism.repository.UserRepository;
+import com.smartrwanda.tourism.repository.UserProfileRepository;
+import com.smartrwanda.tourism.repository.UserPreferenceRepository;
 import com.smartrwanda.tourism.security.JwtService;
 import com.smartrwanda.tourism.validator.EmailValidator;
 import com.smartrwanda.tourism.validator.PasswordValidator;
@@ -28,6 +32,8 @@ import java.util.UUID;
 public class AuthenticationServiceImpl implements AuthenticationService {
 
     private final UserRepository userRepository;
+    private final UserProfileRepository userProfileRepository;
+    private final UserPreferenceRepository userPreferenceRepository;
     private final PasswordResetTokenRepository passwordResetTokenRepository;
     private final PasswordEncoder passwordEncoder;
     private final JwtService jwtService;
@@ -59,6 +65,15 @@ public class AuthenticationServiceImpl implements AuthenticationService {
 
         User savedUser = userRepository.save(user);
 
+        UserProfile profile = new UserProfile();
+        profile.setUserId(savedUser.getId());
+        profile.setFirstName(savedUser.getFirstName());
+        profile.setLastName(savedUser.getLastName());
+        userProfileRepository.save(profile);
+
+        UserPreference preferences = new UserPreference();
+        preferences.setUserId(savedUser.getId());
+        userPreferenceRepository.save(preferences);
 
         sendWelcomeEmail(savedUser.getEmail(), savedUser.getFirstName());
 
@@ -202,4 +217,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
             System.out.println(" Failed to send welcome email to: " + to + " - " + e.getMessage());
         }
     }
+
 }
+
+
