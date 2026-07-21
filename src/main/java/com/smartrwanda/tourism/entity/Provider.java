@@ -4,6 +4,8 @@ import com.smartrwanda.tourism.entity.ProviderCategory;
 import com.smartrwanda.tourism.entity.VerificationStatus;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
+import java.util.List;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
