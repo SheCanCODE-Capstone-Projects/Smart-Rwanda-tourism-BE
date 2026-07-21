@@ -1,15 +1,15 @@
 package com.smartrwanda.tourism.entity;
 
-import com.smartrwanda.tourism.entity.ProviderCategory;
-import com.smartrwanda.tourism.entity.VerificationStatus;
+
+import java.util.List;
+import java.util.ArrayList;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 @Entity
 @Table(name = "providers")
-@Getter @Setter
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 public class Provider extends BaseEntity {
@@ -20,7 +20,7 @@ public class Provider extends BaseEntity {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "employer_id")
-    private Provider employer; 
+    private Provider employer;
 
     @Column(name = "business_name", nullable = false)
     private String businessName;
