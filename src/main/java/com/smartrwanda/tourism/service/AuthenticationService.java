@@ -6,7 +6,7 @@ import com.smartrwanda.tourism.dto.request.GoogleLoginRequest;
 import com.smartrwanda.tourism.dto.request.LoginRequest;
 import com.smartrwanda.tourism.dto.request.RegisterRequest;
 import com.smartrwanda.tourism.dto.request.ResetPasswordRequest;
-import com.smartrwanda.tourism.dto.response.UserResponse;
+import com.smartrwanda.tourism.dto.UserResponse;
 
 public interface AuthenticationService {
 

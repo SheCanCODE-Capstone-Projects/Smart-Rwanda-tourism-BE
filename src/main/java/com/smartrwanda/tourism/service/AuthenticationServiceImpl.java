@@ -2,7 +2,7 @@ package com.smartrwanda.tourism.service;
 
 import com.smartrwanda.tourism.dto.request.*;
 import com.smartrwanda.tourism.dto.response.AuthResponse;
-import com.smartrwanda.tourism.dto.response.UserResponse;
+import com.smartrwanda.tourism.dto.UserResponse;
 import com.smartrwanda.tourism.entity.AuthProvider;
 import com.smartrwanda.tourism.entity.PasswordResetToken;
 import com.smartrwanda.tourism.entity.User;
