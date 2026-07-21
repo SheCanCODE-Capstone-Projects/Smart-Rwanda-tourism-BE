@@ -1,10 +1,12 @@
 spring:
   application:
     name: smart-rwanda-tourism
+
   datasource:
     url: jdbc:postgresql://localhost:5432/smart_rwanda_tourism
     username: postgres
-    password: Divine!1
+    password: "Divine!1"
+
   jpa:
     hibernate:
       ddl-auto: update
@@ -15,11 +17,18 @@ spring:
         format_sql: true
     show-sql: true
 
+  servlet:
+    multipart:
+      enabled: true
+      max-file-size: 10MB
+      max-request-size: 10MB
+      file-size-threshold: 2KB
+      location: ${java.io.tmpdir}
 
   mail:
     host: smtp.gmail.com
     port: 587
-    username: 
+    username:
     password:
     properties:
       mail:
@@ -32,13 +41,16 @@ spring:
 server:
   port: ${SERVER_PORT:8080}
 
-
 jwt:
   secret: ${JWT_SECRET:404E635266556A586E3272357538782F413F4428472B4B6250645367566B5970}
   expiration: ${JWT_EXPIRATION:86400000}
-
 
 logging:
   level:
     org.springframework.security: DEBUG
     com.smartrwanda.tourism: DEBUG
+
+file:
+  upload:
+    dir: uploads/profiles/
+
