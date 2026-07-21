@@ -2,22 +2,24 @@ package com.smartrwanda.tourism.entity;
 
 import jakarta.persistence.*;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
-
+import lombok.NoArgsConstructor;
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
 @Table(name = "providers")
-@Getter
-@Setter
+@Getter @Setter
 @NoArgsConstructor
 public class Provider extends BaseEntity {
 
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", nullable = false, unique = true)
     private User user;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "employer_id")
+    private Provider employer; // only used when category = TOUR_GUIDE, links to their Tour Agency
 
     @Column(name = "business_name", nullable = false)
     private String businessName;
@@ -43,4 +45,17 @@ public class Provider extends BaseEntity {
     @Enumerated(EnumType.STRING)
     @Column(name = "verification_status", nullable = false)
     private VerificationStatus verificationStatus = VerificationStatus.PENDING;
+
+
+    @Column(name = "years_of_experience")
+    private Integer yearsOfExperience;
+
+    @ElementCollection
+    @CollectionTable(name = "provider_skills", joinColumns = @JoinColumn(name = "provider_id"))
+    @Column(name = "skill")
+    private List<String> skills = new ArrayList<>();
+
+
+    @Column(name = "profile_picture_url")
+    private String profilePictureUrl;
 }

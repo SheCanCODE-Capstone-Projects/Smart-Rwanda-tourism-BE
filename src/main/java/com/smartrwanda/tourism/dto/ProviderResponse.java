@@ -5,12 +5,10 @@ import com.smartrwanda.tourism.entity.VerificationStatus;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
-
 import java.time.LocalDateTime;
 import java.util.List;
 
-@Getter
-@Setter
+@Getter @Setter
 @Builder
 public class ProviderResponse {
     private Long id;
@@ -24,4 +22,8 @@ public class ProviderResponse {
     private List<String> imageUrls;
     private VerificationStatus verificationStatus;
     private LocalDateTime createdAt;
+
+    private Integer yearsOfExperience;
+    private List<String> skills;
+    private String profilePictureUrl;
 }
