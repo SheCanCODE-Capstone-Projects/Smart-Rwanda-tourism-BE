@@ -5,22 +5,14 @@ import com.smartrwanda.tourism.dto.ProviderResponse;
 import com.smartrwanda.tourism.dto.ProviderSummaryResponse;
 import com.smartrwanda.tourism.entity.Provider;
 import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
+import org.mapstruct.ReportingPolicy;
 
-@Mapper(componentModel = "spring")
+@Mapper(componentModel = "spring", unmappedTargetPolicy = ReportingPolicy.IGNORE)
 public interface ProviderMapper {
 
-    @Mapping(source = "user.id", target = "userId")
-    ProviderResponse toResponse(Provider entity);
+    ProviderResponse toResponse(Provider provider);
 
-    @Mapping(target = "coverImageUrl", expression = "java(entity.getImageUrls().isEmpty() ? null : entity.getImageUrls().get(0))")
-    ProviderSummaryResponse toSummaryResponse(Provider entity);
-
-    @Mapping(target = "id", ignore = true)
-    @Mapping(target = "createdAt", ignore = true)
-    @Mapping(target = "updatedAt", ignore = true)
-    @Mapping(target = "user", ignore = true)
-    @Mapping(target = "verificationStatus", ignore = true)
     Provider toEntity(ProviderRequest request);
-}
 
+    ProviderSummaryResponse toSummaryResponse(Provider provider);
+}

@@ -9,4 +9,9 @@ public enum ProviderCategory {
     TOUR_GUIDE,
     RESTAURANT,
     ATTRACTION
+
+
 }
+
+
+

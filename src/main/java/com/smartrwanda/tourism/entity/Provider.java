@@ -1,46 +1,44 @@
 package com.smartrwanda.tourism.entity;
 
+import com.smartrwanda.tourism.entity.ProviderCategory;
+import com.smartrwanda.tourism.entity.VerificationStatus;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
-import lombok.NoArgsConstructor;
-import java.util.ArrayList;
-import java.util.List;
 
 @Entity
 @Table(name = "providers")
 @Getter @Setter
 @NoArgsConstructor
+@AllArgsConstructor
 public class Provider extends BaseEntity {
 
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id", nullable = false, unique = true)
-    private User user;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "employer_id")
-    private Provider employer; // only used when category = TOUR_GUIDE, links to their Tour Agency
+    private Provider employer; 
 
     @Column(name = "business_name", nullable = false)
     private String businessName;
 
-    @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
-    private ProviderCategory category;
-
-    @Column(columnDefinition = "TEXT")
     private String description;
 
-    private String phone;
+    @Enumerated(EnumType.STRING)
+    private ProviderCategory category;
 
-    private String email;
+    @Column(name = "contact_email")
+    private String contactEmail;
+
+    @Column(name = "contact_phone")
+    private String contactPhone;
 
     private String location;
 
-    @ElementCollection
-    @CollectionTable(name = "provider_images", joinColumns = @JoinColumn(name = "provider_id"))
-    @Column(name = "image_url")
-    private List<String> imageUrls = new ArrayList<>();
+    private String website;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "verification_status", nullable = false)

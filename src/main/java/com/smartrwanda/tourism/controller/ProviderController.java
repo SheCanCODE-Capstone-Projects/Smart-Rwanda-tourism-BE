@@ -37,9 +37,12 @@ public class ProviderController {
     @GetMapping
     public ResponseEntity<ApiResponse<List<ProviderSummaryResponse>>> getAll(
             @RequestParam(required = false) ProviderCategory category) {
-        List<ProviderSummaryResponse> providers = category != null
-                ? providerService.getByCategory(category)
-                : providerService.getAll();
+        List<ProviderSummaryResponse> providers;
+        if (category != null) {
+            providers = providerService.getByCategory(category);
+        } else {
+            providers = providerService.getAll();
+        }
         return ResponseEntity.ok(ApiResponse.success(providers));
     }
 
@@ -52,7 +55,7 @@ public class ProviderController {
     @DeleteMapping("/{id}")
     public ResponseEntity<ApiResponse<Void>> delete(@PathVariable Long id) {
         providerService.delete(id);
-        return ResponseEntity.ok(ApiResponse.success("Provider deleted", null));
+        return ResponseEntity.ok(ApiResponse.<Void>success("Provider deleted", null));
     }
 
     // Admin endpoints

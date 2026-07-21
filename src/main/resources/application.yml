@@ -2,9 +2,8 @@ spring:
   application:
     name: smart-rwanda-tourism
   datasource:
-    url: ${SPRING_DATASOURCE_URL:jdbc:postgresql://localhost:5432/smart_rwanda_tourism}
-    username: ${SPRING_DATASOURCE_USERNAME:postgres}
-    password: ${SPRING_DATASOURCE_PASSWORD:@Chadia0799321180}
+    username: ${SPRING_DATASOURCE_USERNAME}
+    password: ${SPRING_DATASOURCE_PASSWORD}
   jpa:
     hibernate:
       ddl-auto: update
@@ -15,12 +14,11 @@ spring:
         format_sql: true
     show-sql: true
 
-
   mail:
     host: smtp.gmail.com
     port: 587
-    username: ingabirechadia2003@gmail.com
-    password: jxrzrnaiuoxpfrpu
+
+
     properties:
       mail:
         smtp:
@@ -32,11 +30,14 @@ spring:
 server:
   port: ${SERVER_PORT:8080}
 
-
 jwt:
-  secret: ${JWT_SECRET:404E635266556A586E3272357538782F413F4428472B4B6250645367566B5970}
-  expiration: ${JWT_EXPIRATION:86400000}
+  secret: ${JWT_SECRET}
+  expiration: ${JWT_EXPIRATION}
 
+cloudinary:
+  cloud-name: ${CLOUDINARY_CLOUD_NAME}
+  api-key: ${CLOUDINARY_API_KEY}
+  api-secret: ${CLOUDINARY_API_SECRET}
 
 logging:
   level:
