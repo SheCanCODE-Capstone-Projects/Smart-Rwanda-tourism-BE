@@ -16,17 +16,28 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 public class Notification extends BaseEntity {
 
+
+
+    @Column(name = "provider_id")
+    private Long providerId;
+
+    @Column(name = "user_id")
+    private Long userId;
+
+
+
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "provider_id")
+    @JoinColumn(name = "provider_id", insertable = false, updatable = false)
     private Provider provider;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id")
+    @JoinColumn(name = "user_id", insertable = false, updatable = false)
     private User user;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "reservation_id")
     private Reservation reservation;
+
 
     @Column(nullable = false)
     private String title;
@@ -49,5 +60,5 @@ public class Notification extends BaseEntity {
     private String icon;
 
     @Column(name = "target_type")
-    private String targetType;  // "PROVIDER" or "USER"
+    private String targetType;
 }
