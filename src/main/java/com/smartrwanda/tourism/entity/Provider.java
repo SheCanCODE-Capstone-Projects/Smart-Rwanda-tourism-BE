@@ -22,6 +22,25 @@ public class Provider extends BaseEntity {
     @JoinColumn(name = "employer_id")
     private Provider employer;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id")
+    private User user;
+
+    @Column(name = "logo_url")
+    private String logoUrl;
+
+    @Column(name = "cover_image_url")
+    private String coverImageUrl;
+
+    @Column(name = "average_rating")
+    private Double averageRating = 0.0;
+
+    @Column(name = "total_reviews")
+    private Integer totalReviews = 0;
+
+    @Column(name = "is_active")
+    private Boolean isActive = true;
+
     @Column(name = "business_name", nullable = false)
     private String businessName;
 
