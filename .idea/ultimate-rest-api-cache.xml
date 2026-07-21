@@ -33,6 +33,180 @@
         </params>
       </api>
       <api method="GET" url="/api/auth/me" className="com.smartrwanda.tourism.controller.AuthenticationController" methodName="getCurrentUser" moduleName="tourism" />
+      <api method="POST" url="/api/providers/register/{userId}" className="com.smartrwanda.tourism.controller.ProviderController" methodName="register" moduleName="tourism">
+        <params>
+          <param name="userId" value="1" type="PATH" dataType="Long" />
+          <param name="body" value="{&#13;&#10;  &quot;businessName&quot; : &quot;&quot;,&#13;&#10;  &quot;category&quot; : &quot;HOTEL&quot;,&#13;&#10;  &quot;description&quot; : &quot;&quot;,&#13;&#10;  &quot;phone&quot; : &quot;&quot;,&#13;&#10;  &quot;email&quot; : &quot;&quot;,&#13;&#10;  &quot;location&quot; : &quot;&quot;,&#13;&#10;  &quot;imageUrls&quot; : [ &quot;&quot; ]&#13;&#10;}" type="BODY" dataType="ProviderRequest" />
+        </params>
+      </api>
+      <api method="GET" url="/api/providers/{id}" className="com.smartrwanda.tourism.controller.ProviderController" methodName="getById" moduleName="tourism">
+        <params>
+          <param name="id" value="1" type="PATH" dataType="Long" />
+        </params>
+      </api>
+      <api method="GET" url="/api/providers" className="com.smartrwanda.tourism.controller.ProviderController" methodName="getAll" moduleName="tourism">
+        <params>
+          <param name="category" value="" type="QUERY" dataType="ProviderCategory" />
+        </params>
+      </api>
+      <api method="PUT" url="/api/providers/{id}" className="com.smartrwanda.tourism.controller.ProviderController" methodName="update" moduleName="tourism">
+        <params>
+          <param name="id" value="1" type="PATH" dataType="Long" />
+          <param name="body" value="{&#13;&#10;  &quot;businessName&quot; : &quot;&quot;,&#13;&#10;  &quot;category&quot; : &quot;HOTEL&quot;,&#13;&#10;  &quot;description&quot; : &quot;&quot;,&#13;&#10;  &quot;phone&quot; : &quot;&quot;,&#13;&#10;  &quot;email&quot; : &quot;&quot;,&#13;&#10;  &quot;location&quot; : &quot;&quot;,&#13;&#10;  &quot;imageUrls&quot; : [ &quot;&quot; ]&#13;&#10;}" type="BODY" dataType="ProviderRequest" />
+        </params>
+      </api>
+      <api method="DELETE" url="/api/providers/{id}" className="com.smartrwanda.tourism.controller.ProviderController" methodName="delete" moduleName="tourism">
+        <params>
+          <param name="id" value="1" type="PATH" dataType="Long" />
+        </params>
+      </api>
+      <api method="GET" url="/api/providers/admin/pending" className="com.smartrwanda.tourism.controller.ProviderController" methodName="getPending" moduleName="tourism" />
+      <api method="PATCH" url="/api/providers/admin/{id}/verify" className="com.smartrwanda.tourism.controller.ProviderController" methodName="verify" moduleName="tourism">
+        <params>
+          <param name="id" value="1" type="PATH" dataType="Long" />
+        </params>
+      </api>
+      <api method="PATCH" url="/api/providers/admin/{id}/reject" className="com.smartrwanda.tourism.controller.ProviderController" methodName="reject" moduleName="tourism">
+        <params>
+          <param name="id" value="1" type="PATH" dataType="Long" />
+        </params>
+      </api>
+      <api method="GET" url="/api/providers/admin/statistics" className="com.smartrwanda.tourism.controller.ProviderController" methodName="getStatistics" moduleName="tourism" />
+      <api method="POST" url="/api/reservations" className="com.smartrwanda.tourism.controller.UserReservationController" methodName="createReservation" moduleName="tourism">
+        <params>
+          <param name="body" value="{&#13;&#10;  &quot;providerId&quot; : 0,&#13;&#10;  &quot;specialRequests&quot; : &quot;&quot;,&#13;&#10;  &quot;totalPrice&quot; : 0.0,&#13;&#10;  &quot;currency&quot; : &quot;&quot;,&#13;&#10;  &quot;checkInDate&quot; : &quot;2025-01-01 12:00:00&quot;,&#13;&#10;  &quot;checkOutDate&quot; : &quot;2025-01-01 12:00:00&quot;,&#13;&#10;  &quot;numberOfGuests&quot; : 0,&#13;&#10;  &quot;roomType&quot; : &quot;&quot;,&#13;&#10;  &quot;pickupDate&quot; : &quot;2025-01-01 12:00:00&quot;,&#13;&#10;  &quot;returnDate&quot; : &quot;2025-01-01 12:00:00&quot;,&#13;&#10;  &quot;vehicleType&quot; : &quot;&quot;,&#13;&#10;  &quot;tourDate&quot; : &quot;2025-01-01 12:00:00&quot;,&#13;&#10;  &quot;tourPackage&quot; : &quot;&quot;,&#13;&#10;  &quot;numberOfPeople&quot; : 0,&#13;&#10;  &quot;visitDate&quot; : &quot;2025-01-01 12:00:00&quot;,&#13;&#10;  &quot;numberOfVisitors&quot; : 0&#13;&#10;}" type="BODY" dataType="ReservationRequest" />
+          <param name="token" value="" type="QUERY" dataType="String" />
+        </params>
+      </api>
+      <api method="GET" url="/api/reservations/user" className="com.smartrwanda.tourism.controller.UserReservationController" methodName="getUserReservations" moduleName="tourism">
+        <params>
+          <param name="token" value="" type="QUERY" dataType="String" />
+        </params>
+      </api>
+      <api method="GET" url="/api/reservations/{reservationId}" className="com.smartrwanda.tourism.controller.UserReservationController" methodName="getReservationById" moduleName="tourism">
+        <params>
+          <param name="reservationId" value="1" type="PATH" dataType="Long" />
+          <param name="token" value="" type="QUERY" dataType="String" />
+        </params>
+      </api>
+      <api method="PATCH" url="/api/reservations/{reservationId}/cancel" className="com.smartrwanda.tourism.controller.UserReservationController" methodName="cancelReservation" moduleName="tourism">
+        <params>
+          <param name="reservationId" value="1" type="PATH" dataType="Long" />
+          <param name="reason" value="" type="QUERY" dataType="String" />
+          <param name="token" value="" type="QUERY" dataType="String" />
+        </params>
+      </api>
+      <api method="GET" url="/api/reservations/user/status/{status}" className="com.smartrwanda.tourism.controller.UserReservationController" methodName="getUserReservationsByStatus" moduleName="tourism">
+        <params>
+          <param name="status" value="1" type="PATH" dataType="ReservationStatus" />
+          <param name="token" value="" type="QUERY" dataType="String" />
+        </params>
+      </api>
+      <api method="GET" url="/api/reservations/user/count/{status}" className="com.smartrwanda.tourism.controller.UserReservationController" methodName="countReservationsByStatus" moduleName="tourism">
+        <params>
+          <param name="status" value="1" type="PATH" dataType="ReservationStatus" />
+          <param name="token" value="" type="QUERY" dataType="String" />
+        </params>
+      </api>
+      <api method="POST" url="/api/discover" className="com.smartrwanda.tourism.controller.DiscoverController" methodName="createDiscoverItem" moduleName="tourism">
+        <params>
+          <param name="body" value="{&#13;&#10;  &quot;name&quot; : &quot;&quot;,&#13;&#10;  &quot;description&quot; : &quot;&quot;,&#13;&#10;  &quot;mainCategory&quot; : &quot;STAY&quot;,&#13;&#10;  &quot;subCategory&quot; : &quot;&quot;,&#13;&#10;  &quot;location&quot; : &quot;&quot;,&#13;&#10;  &quot;latitude&quot; : 0.0,&#13;&#10;  &quot;longitude&quot; : 0.0,&#13;&#10;  &quot;images&quot; : [ &quot;&quot; ],&#13;&#10;  &quot;openingHours&quot; : &quot;&quot;,&#13;&#10;  &quot;price&quot; : 0.0,&#13;&#10;  &quot;contactInfo&quot; : &quot;&quot;,&#13;&#10;  &quot;website&quot; : &quot;&quot;,&#13;&#10;  &quot;featured&quot; : true,&#13;&#10;  &quot;starRating&quot; : 0,&#13;&#10;  &quot;vehicleTypes&quot; : &quot;&quot;,&#13;&#10;  &quot;cuisineType&quot; : &quot;&quot;,&#13;&#10;  &quot;entranceFee&quot; : 0.0&#13;&#10;}" type="BODY" dataType="DiscoverItemRequest" />
+        </params>
+      </api>
+      <api method="PUT" url="/api/discover/{id}" className="com.smartrwanda.tourism.controller.DiscoverController" methodName="updateDiscoverItem" moduleName="tourism">
+        <params>
+          <param name="id" value="1" type="PATH" dataType="Long" />
+          <param name="body" value="{&#13;&#10;  &quot;name&quot; : &quot;&quot;,&#13;&#10;  &quot;description&quot; : &quot;&quot;,&#13;&#10;  &quot;mainCategory&quot; : &quot;STAY&quot;,&#13;&#10;  &quot;subCategory&quot; : &quot;&quot;,&#13;&#10;  &quot;location&quot; : &quot;&quot;,&#13;&#10;  &quot;latitude&quot; : 0.0,&#13;&#10;  &quot;longitude&quot; : 0.0,&#13;&#10;  &quot;images&quot; : [ &quot;&quot; ],&#13;&#10;  &quot;openingHours&quot; : &quot;&quot;,&#13;&#10;  &quot;price&quot; : 0.0,&#13;&#10;  &quot;contactInfo&quot; : &quot;&quot;,&#13;&#10;  &quot;website&quot; : &quot;&quot;,&#13;&#10;  &quot;featured&quot; : true,&#13;&#10;  &quot;starRating&quot; : 0,&#13;&#10;  &quot;vehicleTypes&quot; : &quot;&quot;,&#13;&#10;  &quot;cuisineType&quot; : &quot;&quot;,&#13;&#10;  &quot;entranceFee&quot; : 0.0&#13;&#10;}" type="BODY" dataType="DiscoverItemRequest" />
+        </params>
+      </api>
+      <api method="DELETE" url="/api/discover/{id}" className="com.smartrwanda.tourism.controller.DiscoverController" methodName="deleteDiscoverItem" moduleName="tourism">
+        <params>
+          <param name="id" value="1" type="PATH" dataType="Long" />
+        </params>
+      </api>
+      <api method="GET" url="/api/discover/{id}" className="com.smartrwanda.tourism.controller.DiscoverController" methodName="getDiscoverItem" moduleName="tourism">
+        <params>
+          <param name="id" value="1" type="PATH" dataType="Long" />
+        </params>
+      </api>
+      <api method="GET" url="/api/discover" className="com.smartrwanda.tourism.controller.DiscoverController" methodName="getAllDiscoverItems" moduleName="tourism" />
+      <api method="GET" url="/api/discover/page" className="com.smartrwanda.tourism.controller.DiscoverController" methodName="getAllDiscoverItemsPaginated" moduleName="tourism">
+        <params>
+          <param name="page" value="" type="QUERY" dataType="int" />
+          <param name="size" value="" type="QUERY" dataType="int" />
+        </params>
+      </api>
+      <api method="GET" url="/api/discover/category/{mainCategory}" className="com.smartrwanda.tourism.controller.DiscoverController" methodName="getByMainCategory" moduleName="tourism">
+        <params>
+          <param name="mainCategory" value="1" type="PATH" dataType="MainCategory" />
+        </params>
+      </api>
+      <api method="GET" url="/api/discover/category/{mainCategory}/page" className="com.smartrwanda.tourism.controller.DiscoverController" methodName="getByMainCategoryPaginated" moduleName="tourism">
+        <params>
+          <param name="mainCategory" value="1" type="PATH" dataType="MainCategory" />
+          <param name="page" value="" type="QUERY" dataType="int" />
+          <param name="size" value="" type="QUERY" dataType="int" />
+        </params>
+      </api>
+      <api method="GET" url="/api/discover/category/{mainCategory}/{subCategory}" className="com.smartrwanda.tourism.controller.DiscoverController" methodName="getByMainCategoryAndSubCategory" moduleName="tourism">
+        <params>
+          <param name="mainCategory" value="1" type="PATH" dataType="MainCategory" />
+          <param name="subCategory" value="test" type="PATH" dataType="String" />
+        </params>
+      </api>
+      <api method="GET" url="/api/discover/category/{mainCategory}/{subCategory}/page" className="com.smartrwanda.tourism.controller.DiscoverController" methodName="getByMainCategoryAndSubCategoryPaginated" moduleName="tourism">
+        <params>
+          <param name="mainCategory" value="1" type="PATH" dataType="MainCategory" />
+          <param name="subCategory" value="test" type="PATH" dataType="String" />
+          <param name="page" value="" type="QUERY" dataType="int" />
+          <param name="size" value="" type="QUERY" dataType="int" />
+        </params>
+      </api>
+      <api method="GET" url="/api/discover/search" className="com.smartrwanda.tourism.controller.DiscoverController" methodName="search" moduleName="tourism">
+        <params>
+          <param name="keyword" value="" type="QUERY" dataType="String" />
+        </params>
+      </api>
+      <api method="GET" url="/api/discover/search/{mainCategory}" className="com.smartrwanda.tourism.controller.DiscoverController" methodName="searchByCategory" moduleName="tourism">
+        <params>
+          <param name="mainCategory" value="1" type="PATH" dataType="MainCategory" />
+          <param name="keyword" value="" type="QUERY" dataType="String" />
+        </params>
+      </api>
+      <api method="GET" url="/api/discover/featured" className="com.smartrwanda.tourism.controller.DiscoverController" methodName="getFeatured" moduleName="tourism" />
+      <api method="GET" url="/api/discover/featured/{mainCategory}" className="com.smartrwanda.tourism.controller.DiscoverController" methodName="getFeaturedByCategory" moduleName="tourism">
+        <params>
+          <param name="mainCategory" value="1" type="PATH" dataType="MainCategory" />
+        </params>
+      </api>
+      <api method="GET" url="/api/discover/recent" className="com.smartrwanda.tourism.controller.DiscoverController" methodName="getRecent" moduleName="tourism" />
+      <api method="GET" url="/api/discover/recent/{mainCategory}" className="com.smartrwanda.tourism.controller.DiscoverController" methodName="getRecentByCategory" moduleName="tourism">
+        <params>
+          <param name="mainCategory" value="1" type="PATH" dataType="MainCategory" />
+        </params>
+      </api>
+      <api method="GET" url="/api/discover/top-rated" className="com.smartrwanda.tourism.controller.DiscoverController" methodName="getTopRated" moduleName="tourism" />
+      <api method="GET" url="/api/discover/top-rated/{mainCategory}" className="com.smartrwanda.tourism.controller.DiscoverController" methodName="getTopRatedByCategory" moduleName="tourism">
+        <params>
+          <param name="mainCategory" value="1" type="PATH" dataType="MainCategory" />
+        </params>
+      </api>
+      <api method="POST" url="/api/discover/filter" className="com.smartrwanda.tourism.controller.DiscoverController" methodName="filterDiscoverItems" moduleName="tourism">
+        <params>
+          <param name="body" value="{&#13;&#10;  &quot;mainCategory&quot; : &quot;STAY&quot;,&#13;&#10;  &quot;subCategory&quot; : &quot;&quot;,&#13;&#10;  &quot;location&quot; : &quot;&quot;,&#13;&#10;  &quot;keyword&quot; : &quot;&quot;,&#13;&#10;  &quot;featured&quot; : true,&#13;&#10;  &quot;minRating&quot; : 0.0,&#13;&#10;  &quot;minPrice&quot; : 0.0,&#13;&#10;  &quot;maxPrice&quot; : 0.0,&#13;&#10;  &quot;sortBy&quot; : &quot;&quot;,&#13;&#10;  &quot;sortDirection&quot; : &quot;&quot;,&#13;&#10;  &quot;page&quot; : 0,&#13;&#10;  &quot;size&quot; : 0&#13;&#10;}" type="BODY" dataType="DiscoverFilterRequest" />
+        </params>
+      </api>
+      <api method="GET" url="/api/discover/categories" className="com.smartrwanda.tourism.controller.DiscoverController" methodName="getAllCategories" moduleName="tourism" />
+      <api method="GET" url="/api/discover/categories/{mainCategory}" className="com.smartrwanda.tourism.controller.DiscoverController" methodName="getCategoryDetails" moduleName="tourism">
+        <params>
+          <param name="mainCategory" value="1" type="PATH" dataType="MainCategory" />
+        </params>
+      </api>
+      <api method="GET" url="/api/discover/location" className="com.smartrwanda.tourism.controller.DiscoverController" methodName="getByLocation" moduleName="tourism">
+        <params>
+          <param name="location" value="" type="QUERY" dataType="String" />
+        </params>
+      </api>
     </cachedApis>
   </component>
 </project>
