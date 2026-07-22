@@ -14,7 +14,7 @@ import java.util.Optional;
 
 public interface ReservationRepository extends JpaRepository<Reservation, Long> {
 
-    |
+
 
     Page<Reservation> findByProviderId(Long providerId, Pageable pageable);
 
