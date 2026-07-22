@@ -1,10 +1,10 @@
 package com.smartrwanda.tourism.service;
 
-import com.smartrwanda.tourism.dto.request.ReviewFilterRequest;
-import com.smartrwanda.tourism.dto.request.ReviewRequest;
-import com.smartrwanda.tourism.dto.response.RatingDistributionResponse;
-import com.smartrwanda.tourism.dto.response.ReviewResponse;
-import com.smartrwanda.tourism.dto.response.ReviewSummaryResponse;
+import com.smartrwanda.tourism.dto.ReviewFilterRequest;
+import com.smartrwanda.tourism.dto.ReviewRequest;
+import com.smartrwanda.tourism.dto.RatingDistributionResponse;
+import com.smartrwanda.tourism.dto.ReviewResponse;
+import com.smartrwanda.tourism.dto.ReviewSummaryResponse;
 import com.smartrwanda.tourism.entity.Review;
 import com.smartrwanda.tourism.entity.ReviewHelpful;
 import com.smartrwanda.tourism.entity.Role;

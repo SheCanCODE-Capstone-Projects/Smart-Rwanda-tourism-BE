@@ -1,10 +1,10 @@
 package com.smartrwanda.tourism.controller;
 
 import com.smartrwanda.tourism.common.ApiResponse;
-import com.smartrwanda.tourism.dto.request.ReviewFilterRequest;
-import com.smartrwanda.tourism.dto.request.ReviewRequest;
-import com.smartrwanda.tourism.dto.response.ReviewResponse;
-import com.smartrwanda.tourism.dto.response.ReviewSummaryResponse;
+import com.smartrwanda.tourism.dto.ReviewFilterRequest;
+import com.smartrwanda.tourism.dto.ReviewRequest;
+import com.smartrwanda.tourism.dto.ReviewResponse;
+import com.smartrwanda.tourism.dto.ReviewSummaryResponse;
 import com.smartrwanda.tourism.enums.ReviewTargetType;
 import com.smartrwanda.tourism.service.ReviewService;
 import jakarta.validation.Valid;

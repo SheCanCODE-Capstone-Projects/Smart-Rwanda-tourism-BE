@@ -1,4 +1,4 @@
-package com.smartrwanda.tourism.dto.response;
+package com.smartrwanda.tourism.dto;
 
 import com.smartrwanda.tourism.enums.ReviewStatus;
 import com.smartrwanda.tourism.enums.ReviewTargetType;

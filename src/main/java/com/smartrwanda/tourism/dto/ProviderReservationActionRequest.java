@@ -1,7 +1,7 @@
 package com.smartrwanda.tourism.dto;
 
+import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -11,11 +11,8 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
-public class ProviderStatistics {
+public class ProviderReservationActionRequest {
 
-    private long totalProviders;
-    private long pendingCount;
-    private long verifiedCount;
-    private long rejectedCount;
+    @Size(max = 500, message = "Reason must not exceed 500 characters")
+    private String reason;
 }

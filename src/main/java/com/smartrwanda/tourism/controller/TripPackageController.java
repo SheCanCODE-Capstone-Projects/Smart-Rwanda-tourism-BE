@@ -1,9 +1,9 @@
 package com.smartrwanda.tourism.controller;
 
 import com.smartrwanda.tourism.common.ApiResponse;
-import com.smartrwanda.tourism.dto.request.MatchTripRequest;
-import com.smartrwanda.tourism.dto.request.TripPackageRequest;
-import com.smartrwanda.tourism.dto.response.TripPackageResponse;
+import com.smartrwanda.tourism.dto.MatchTripRequest;
+import com.smartrwanda.tourism.dto.TripPackageRequest;
+import com.smartrwanda.tourism.dto.TripPackageResponse;
 import com.smartrwanda.tourism.service.TripPackageService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
