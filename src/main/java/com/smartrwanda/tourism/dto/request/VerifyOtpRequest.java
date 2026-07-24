@@ -8,7 +8,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class ResetPasswordRequest {
+public class VerifyOtpRequest {
 
     @NotBlank
     @Email
@@ -17,8 +17,4 @@ public class ResetPasswordRequest {
     @NotBlank
     @Size(min = 6, max = 6, message = "OTP must be exactly 6 digits")
     private String otp;
-
-    @NotBlank
-    @Size(min = 8, message = "Password must be at least 8 characters")
-    private String newPassword;
 }
