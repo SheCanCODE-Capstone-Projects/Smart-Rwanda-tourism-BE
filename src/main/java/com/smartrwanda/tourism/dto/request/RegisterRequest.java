@@ -1,4 +1,4 @@
-package com.smartrwanda.tourism.dto;
+package com.smartrwanda.tourism.dto.request;
 
 import com.smartrwanda.tourism.entity.Role;
 import jakarta.validation.constraints.Email;

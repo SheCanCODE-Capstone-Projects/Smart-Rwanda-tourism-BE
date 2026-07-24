@@ -1,7 +1,7 @@
 package com.smartrwanda.tourism.controller;
 
 import com.smartrwanda.tourism.common.ApiResponse;
-import com.smartrwanda.tourism.dto.NotificationResponse;
+import com.smartrwanda.tourism.dto.response.NotificationResponse;
 import com.smartrwanda.tourism.service.NotificationService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
