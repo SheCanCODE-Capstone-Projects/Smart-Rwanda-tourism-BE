@@ -1,8 +1,8 @@
 package com.smartrwanda.tourism.service;
 
-import com.smartrwanda.tourism.dto.MessageRequest;
-import com.smartrwanda.tourism.dto.ConversationResponse;
-import com.smartrwanda.tourism.dto.MessageResponse;
+import com.smartrwanda.tourism.dto.request.MessageRequest;
+import com.smartrwanda.tourism.dto.response.ConversationResponse;
+import com.smartrwanda.tourism.dto.response.MessageResponse;
 
 import java.util.List;
 

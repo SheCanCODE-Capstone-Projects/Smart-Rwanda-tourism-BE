@@ -1,6 +1,6 @@
 package com.smartrwanda.tourism.service;
 
-import com.smartrwanda.tourism.dto.NotificationResponse;
+import com.smartrwanda.tourism.dto.response.NotificationResponse;
 import com.smartrwanda.tourism.entity.Reservation;
 
 import java.util.List;

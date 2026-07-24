@@ -1,7 +1,9 @@
 package com.smartrwanda.tourism.mapper;
 
+
 import com.smartrwanda.tourism.dto.UserResponse;
 import com.smartrwanda.tourism.entity.User;
+
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.ReportingPolicy;

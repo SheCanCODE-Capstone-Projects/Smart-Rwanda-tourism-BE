@@ -1,4 +1,4 @@
-package com.smartrwanda.tourism.dto;
+package com.smartrwanda.tourism.dto.request;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
@@ -7,8 +7,10 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class ForgotPasswordRequest {
-    @NotBlank
-    @Email
+public class LoginRequest {
+    @NotBlank @Email
     private String email;
+
+    @NotBlank
+    private String password;
 }

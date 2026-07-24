@@ -1,9 +1,9 @@
 package com.smartrwanda.tourism.controller;
 
 import com.smartrwanda.tourism.common.ApiResponse;
-import com.smartrwanda.tourism.dto.MessageRequest;
-import com.smartrwanda.tourism.dto.ConversationResponse;
-import com.smartrwanda.tourism.dto.MessageResponse;
+import com.smartrwanda.tourism.dto.request.MessageRequest;
+import com.smartrwanda.tourism.dto.response.ConversationResponse;
+import com.smartrwanda.tourism.dto.response.MessageResponse;
 import com.smartrwanda.tourism.service.MessagingService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
