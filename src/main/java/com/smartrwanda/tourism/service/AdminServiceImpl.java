@@ -227,9 +227,6 @@ public class AdminServiceImpl implements AdminService {
     private AdminProviderResponse mapToAdminProviderResponse(Provider provider) {
         Long totalBookings = reservationRepository.countByProviderId(provider.getId());
 
-        // ✅ REMOVED: int totalServices = provider.getServices() != null ? provider.getServices().size() : 0;
-        // Using ProviderService to get service count instead
-
         return AdminProviderResponse.builder()
                 .id(provider.getId())
                 .businessName(provider.getBusinessName())
@@ -237,9 +234,7 @@ public class AdminServiceImpl implements AdminService {
                 .category(provider.getCategory())
                 .contactEmail(provider.getContactEmail())
                 .contactPhone(provider.getContactPhone())
-                .location(provider.getLocation())
                 .website(provider.getWebsite())
-                .verificationStatus(provider.getVerificationStatus())
                 .logoUrl(provider.getLogoUrl())
                 .coverImageUrl(provider.getCoverImageUrl())
                 .averageRating(provider.getAverageRating())
@@ -251,7 +246,7 @@ public class AdminServiceImpl implements AdminService {
                 .createdAt(provider.getCreatedAt())
                 .updatedAt(provider.getUpdatedAt())
                 .totalBookings(totalBookings)
-                .totalServices(0L)  // ✅ Set to 0 or fetch from ProviderService
+                .totalServices(0L)
                 .build();
     }
 
