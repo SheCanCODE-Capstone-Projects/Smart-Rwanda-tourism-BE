@@ -21,7 +21,7 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class User extends BaseEntity implements UserDetails {  // ✅ Implement UserDetails
+public class User extends BaseEntity implements UserDetails {
 
     @Column(name = "first_name", nullable = false)
     private String firstName;
@@ -54,8 +54,6 @@ public class User extends BaseEntity implements UserDetails {  // ✅ Implement 
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<PasswordResetToken> resetTokens = new ArrayList<>();
-
-    // ===== UserDetails Methods =====
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
