@@ -29,6 +29,7 @@ public class ProviderServiceImpl implements ProviderService {
     private final ProviderRepository providerRepository;
     private final UserRepository userRepository;
     private final ProviderMapper providerMapper;
+    private final CloudinaryService cloudinaryService;
 
     @Override
     public ProviderResponse registerProvider(Long userId, ProviderRequest request) {
@@ -113,7 +114,6 @@ public class ProviderServiceImpl implements ProviderService {
 
     @Override
     public List<ProviderResponse> getProvidersByUser(Long userId) {
-        // findByUserId returns Optional<Provider> — map to list of 0 or 1 element
         return providerRepository.findByUserId(userId)
                 .map(providerMapper::toResponse)
                 .map(List::of)
@@ -138,6 +138,8 @@ public class ProviderServiceImpl implements ProviderService {
     public ProviderResponse uploadLogo(Long id, MultipartFile file) {
         Provider provider = providerRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Provider not found"));
+        String logoUrl = cloudinaryService.uploadImage(file, "providers/logos");
+        provider.setLogoUrl(logoUrl);
         return providerMapper.toResponse(providerRepository.save(provider));
     }
 
@@ -145,6 +147,8 @@ public class ProviderServiceImpl implements ProviderService {
     public ProviderResponse uploadCoverImage(Long id, MultipartFile file) {
         Provider provider = providerRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Provider not found"));
+        String coverImageUrl = cloudinaryService.uploadImage(file, "providers/covers");
+        provider.setCoverImageUrl(coverImageUrl);
         return providerMapper.toResponse(providerRepository.save(provider));
     }
 

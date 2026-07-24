@@ -58,7 +58,6 @@ public class ProviderController {
         return ResponseEntity.ok(ApiResponse.<Void>success("Provider deleted", null));
     }
 
-    // Admin endpoints
     @GetMapping("/admin/pending")
     public ResponseEntity<ApiResponse<List<ProviderSummaryResponse>>> getPending() {
         return ResponseEntity.ok(ApiResponse.success(providerService.getPendingProviders()));

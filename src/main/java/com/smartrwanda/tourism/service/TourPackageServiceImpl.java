@@ -41,15 +41,23 @@ public class TourPackageServiceImpl implements TourPackageService {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public TourPackageResponse getById(Long id) {
         TourPackage tourPackage = tourPackageRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Tour package not found"));
+        tourPackage.getImageUrls().size();
+        tourPackage.getInclusions().size();
         return tourPackageMapper.toResponse(tourPackage);
     }
 
     @Override
+    @Transactional(readOnly = true)
     public List<TourPackageResponse> getByProvider(Long providerId) {
         return tourPackageRepository.findByProviderId(providerId).stream()
+                .peek(tp -> {
+                    tp.getImageUrls().size();
+                    tp.getInclusions().size();
+                })
                 .map(tourPackageMapper::toResponse)
                 .toList();
     }

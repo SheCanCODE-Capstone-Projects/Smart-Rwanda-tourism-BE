@@ -4,6 +4,10 @@ import com.smartrwanda.tourism.common.ApiResponse;
 import com.smartrwanda.tourism.dto.ReservationRequest;
 import com.smartrwanda.tourism.dto.ReservationResponse;
 import com.smartrwanda.tourism.entity.ReservationStatus;
+import com.smartrwanda.tourism.entity.User;
+import com.smartrwanda.tourism.exception.ResourceNotFoundException;
+import com.smartrwanda.tourism.repository.UserRepository;
+import com.smartrwanda.tourism.security.JwtService;
 import com.smartrwanda.tourism.service.UserReservationService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -19,6 +23,8 @@ import java.util.List;
 public class UserReservationController {
 
     private final UserReservationService userReservationService;
+    private final JwtService jwtService;
+    private final UserRepository userRepository;
 
     @PostMapping
     public ResponseEntity<ApiResponse<ReservationResponse>> createReservation(
@@ -42,7 +48,8 @@ public class UserReservationController {
             @PathVariable Long reservationId,
             @RequestHeader("Authorization") String token) {
         Long userId = getCurrentUserId(token);
-        return ResponseEntity.ok(ApiResponse.success(userReservationService.getReservationById(reservationId, userId)));
+        return ResponseEntity.ok(ApiResponse.success(
+                userReservationService.getReservationById(reservationId, userId)));
     }
 
     @PatchMapping("/{reservationId}/cancel")
@@ -52,7 +59,7 @@ public class UserReservationController {
             @RequestHeader("Authorization") String token) {
         Long userId = getCurrentUserId(token);
         userReservationService.cancelReservation(reservationId, userId, reason);
-        return ResponseEntity.ok(ApiResponse.success("Reservation cancelled successfully", null));
+        return ResponseEntity.ok(ApiResponse.<Void>success("Reservation cancelled successfully", null));
     }
 
     @GetMapping("/user/status/{status}")
@@ -74,6 +81,10 @@ public class UserReservationController {
     }
 
     private Long getCurrentUserId(String token) {
-        return 1L;
+        String bearerToken = token.startsWith("Bearer ") ? token.substring(7) : token;
+        String email = jwtService.extractEmail(bearerToken);
+        User user = userRepository.findByEmail(email)
+                .orElseThrow(() -> new ResourceNotFoundException("User not found"));
+        return user.getId();
     }
 }

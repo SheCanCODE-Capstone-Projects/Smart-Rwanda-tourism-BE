@@ -30,9 +30,9 @@ public class TripPackageServiceImpl implements TripPackageService {
         pkg.setMinBudget(request.getMinBudget());
         pkg.setMaxBudget(request.getMaxBudget());
         pkg.setCoverImage(request.getCoverImage());
-        pkg.setImages(request.getImages() != null ? request.getImages() : new ArrayList<>());
-        pkg.setInterests(request.getInterests() != null ? request.getInterests() : new ArrayList<>());
-        pkg.setItinerary(request.getItinerary() != null ? request.getItinerary() : new ArrayList<>());
+        pkg.setImages(request.getImages() != null ? new ArrayList<>(request.getImages()) : new ArrayList<>());
+        pkg.setInterests(request.getInterests() != null ? new ArrayList<>(request.getInterests()) : new ArrayList<>());
+        pkg.setItinerary(request.getItinerary() != null ? new ArrayList<>(request.getItinerary()) : new ArrayList<>());
         pkg.setIsFeatured(request.getIsFeatured() != null && request.getIsFeatured());
         pkg.setIsActive(true);
 
@@ -52,9 +52,9 @@ public class TripPackageServiceImpl implements TripPackageService {
         pkg.setMinBudget(request.getMinBudget());
         pkg.setMaxBudget(request.getMaxBudget());
         pkg.setCoverImage(request.getCoverImage());
-        pkg.setImages(request.getImages() != null ? request.getImages() : new ArrayList<>());
-        pkg.setInterests(request.getInterests() != null ? request.getInterests() : new ArrayList<>());
-        pkg.setItinerary(request.getItinerary() != null ? request.getItinerary() : new ArrayList<>());
+        pkg.setImages(request.getImages() != null ? new ArrayList<>(request.getImages()) : new ArrayList<>());
+        pkg.setInterests(request.getInterests() != null ? new ArrayList<>(request.getInterests()) : new ArrayList<>());
+        pkg.setItinerary(request.getItinerary() != null ? new ArrayList<>(request.getItinerary()) : new ArrayList<>());
         pkg.setIsFeatured(request.getIsFeatured() != null && request.getIsFeatured());
 
         TripPackage updated = tripPackageRepository.save(pkg);
@@ -71,6 +71,7 @@ public class TripPackageServiceImpl implements TripPackageService {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public List<TripPackageResponse> getAllPackages() {
         return tripPackageRepository.findByIsActiveTrue().stream()
                 .map(this::mapToResponse)
@@ -78,6 +79,7 @@ public class TripPackageServiceImpl implements TripPackageService {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public TripPackageResponse getPackageById(Long id) {
         TripPackage pkg = tripPackageRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Package not found"));
@@ -85,6 +87,7 @@ public class TripPackageServiceImpl implements TripPackageService {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public List<TripPackageResponse> getFeaturedPackages() {
         return tripPackageRepository.findByIsFeaturedTrue().stream()
                 .map(this::mapToResponse)
@@ -92,6 +95,7 @@ public class TripPackageServiceImpl implements TripPackageService {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public List<TripPackageResponse> matchPackages(MatchTripRequest request) {
         int minDays = Math.max(1, request.getNumberOfDays() - 2);
         int maxDays = request.getNumberOfDays() + 2;
@@ -99,14 +103,13 @@ public class TripPackageServiceImpl implements TripPackageService {
         List<TripPackage> matches = tripPackageRepository.findMatchingPackages(
                 minDays, maxDays, request.getBudget());
 
-
         if (request.getInterests() != null && !request.getInterests().isEmpty()) {
             matches = matches.stream()
                     .filter(pkg -> pkg.getInterests().stream()
                             .anyMatch(interest -> request.getInterests().stream()
                                     .anyMatch(userInterest ->
                                             userInterest.toLowerCase().contains(interest.toLowerCase()) ||
-                                                    interest.toLowerCase().contains(userInterest.toLowerCase()))))
+                                            interest.toLowerCase().contains(userInterest.toLowerCase()))))
                     .collect(Collectors.toList());
         }
 
@@ -124,11 +127,13 @@ public class TripPackageServiceImpl implements TripPackageService {
                 .minBudget(pkg.getMinBudget())
                 .maxBudget(pkg.getMaxBudget())
                 .coverImage(pkg.getCoverImage())
-                .images(pkg.getImages())
-                .interests(pkg.getInterests())
-                .itinerary(pkg.getItinerary())
+                .images(new ArrayList<>(pkg.getImages()))
+                .interests(new ArrayList<>(pkg.getInterests()))
+                .itinerary(new ArrayList<>(pkg.getItinerary()))
                 .isFeatured(pkg.getIsFeatured())
                 .isActive(pkg.getIsActive())
+                .createdAt(pkg.getCreatedAt())
+                .updatedAt(pkg.getUpdatedAt())
                 .build();
     }
 }

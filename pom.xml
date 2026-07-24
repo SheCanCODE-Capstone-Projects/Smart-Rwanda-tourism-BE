@@ -121,11 +121,16 @@
             <version>${springdoc.version}</version>
         </dependency>
 
-        <!-- Google Auth -->
         <dependency>
             <groupId>com.google.api-client</groupId>
             <artifactId>google-api-client</artifactId>
             <version>2.2.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.google.http-client</groupId>
+            <artifactId>google-http-client-gson</artifactId>
+            <version>1.44.1</version>
         </dependency>
 
         <!-- ✅ Cloudinary for image upload -->
