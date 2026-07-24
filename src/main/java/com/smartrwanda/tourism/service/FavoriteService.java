@@ -1,7 +1,7 @@
 package com.smartrwanda.tourism.service;
 
-import com.smartrwanda.tourism.dto.request.FavoriteRequest;
-import com.smartrwanda.tourism.dto.response.FavoriteResponse;
+import com.smartrwanda.tourism.dto.FavoriteRequest;
+import com.smartrwanda.tourism.dto.FavoriteResponse;
 import com.smartrwanda.tourism.enums.ReviewTargetType;
 
 import java.util.List;

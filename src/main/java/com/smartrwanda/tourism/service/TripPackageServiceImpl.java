@@ -1,8 +1,8 @@
 package com.smartrwanda.tourism.service;
 
-import com.smartrwanda.tourism.dto.request.MatchTripRequest;
-import com.smartrwanda.tourism.dto.request.TripPackageRequest;
-import com.smartrwanda.tourism.dto.response.TripPackageResponse;
+import com.smartrwanda.tourism.dto.MatchTripRequest;
+import com.smartrwanda.tourism.dto.TripPackageRequest;
+import com.smartrwanda.tourism.dto.TripPackageResponse;
 import com.smartrwanda.tourism.entity.TripPackage;
 import com.smartrwanda.tourism.exception.ResourceNotFoundException;
 import com.smartrwanda.tourism.repository.TripPackageRepository;

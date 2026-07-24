@@ -1,14 +1,10 @@
 package com.smartrwanda.tourism.entity;
 
-import com.smartrwanda.tourism.entity.ProviderCategory;
-import com.smartrwanda.tourism.entity.VerificationStatus;
-import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
+
 import java.util.List;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import java.util.ArrayList;
+import jakarta.persistence.*;
+import lombok.*;
 
 @Entity
 @Table(name = "providers")
@@ -21,6 +17,29 @@ public class Provider extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "employer_id")
+    private Provider employer;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id")
+    private User user;
+
+    @Column(name = "logo_url")
+    private String logoUrl;
+
+    @Column(name = "cover_image_url")
+    private String coverImageUrl;
+
+    @Column(name = "average_rating")
+    private Double averageRating = 0.0;
+
+    @Column(name = "total_reviews")
+    private Integer totalReviews = 0;
+
+    @Column(name = "is_active")
+    private Boolean isActive = true;
 
     @Column(name = "business_name", nullable = false)
     private String businessName;
@@ -41,29 +60,19 @@ public class Provider extends BaseEntity {
     private String website;
 
     @Enumerated(EnumType.STRING)
-    private VerificationStatus verificationStatus;
-
-    @Column(name = "logo_url")
-    private String logoUrl;
-
-    @Column(name = "cover_image_url")
-    private String coverImageUrl;
-
-    @Column(name = "average_rating")
-    private Double averageRating;
-
-    @Column(name = "total_reviews")
-    private Integer totalReviews;
-
-    @Column(name = "opening_hours")
-    private String openingHours;
-
-    @Column(name = "is_active")
-    private Boolean isActive = true;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id")
-    private User user;
+    @Column(name = "verification_status", nullable = false)
+    private VerificationStatus verificationStatus = VerificationStatus.PENDING;
 
 
+    @Column(name = "years_of_experience")
+    private Integer yearsOfExperience;
+
+    @ElementCollection
+    @CollectionTable(name = "provider_skills", joinColumns = @JoinColumn(name = "provider_id"))
+    @Column(name = "skill")
+    private List<String> skills = new ArrayList<>();
+
+
+    @Column(name = "profile_picture_url")
+    private String profilePictureUrl;
 }

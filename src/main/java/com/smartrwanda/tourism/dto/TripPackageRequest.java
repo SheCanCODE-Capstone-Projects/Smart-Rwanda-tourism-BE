@@ -1,4 +1,4 @@
-package com.smartrwanda.tourism.dto.request;
+package com.smartrwanda.tourism.dto;
 
 import com.smartrwanda.tourism.entity.DayActivity;
 import jakarta.validation.constraints.NotBlank;

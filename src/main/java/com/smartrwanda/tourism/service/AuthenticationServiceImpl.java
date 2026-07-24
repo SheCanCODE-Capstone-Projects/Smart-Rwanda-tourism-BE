@@ -31,6 +31,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.util.UUID;
+import org.springframework.security.core.context.SecurityContextHolder;
 
 @Service
 @RequiredArgsConstructor
@@ -171,9 +172,20 @@ public class AuthenticationServiceImpl implements AuthenticationService {
 
     @Override
     public UserResponse getCurrentUser() {
-        throw new UnsupportedOperationException("Not yet implemented");
-    }
+        String email = SecurityContextHolder.getContext().getAuthentication().getName();
 
+        User user = userRepository.findByEmail(email)
+                .orElseThrow(() -> new ResourceNotFoundException("User not found"));
+
+        return UserResponse.builder()
+                .id(user.getId())
+                .firstName(user.getFirstName())
+                .lastName(user.getLastName())
+                .email(user.getEmail())
+                .role(user.getRole())
+                .createdAt(user.getCreatedAt())
+                .build();
+    }
 
 
     private void sendPasswordResetEmail(String to, String token) {

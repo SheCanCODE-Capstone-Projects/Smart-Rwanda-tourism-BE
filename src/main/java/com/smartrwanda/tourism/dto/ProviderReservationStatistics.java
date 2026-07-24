@@ -12,10 +12,17 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class ProviderStatistics {
+public class ProviderReservationStatistics {
 
-    private long totalProviders;
+    private Long providerId;
+
+    private long totalReservations;
     private long pendingCount;
-    private long verifiedCount;
+    private long confirmedCount;
+    private long completedCount;
+    private long cancelledCount;
     private long rejectedCount;
+
+    private Double totalRevenue;
+    private String currency;
 }

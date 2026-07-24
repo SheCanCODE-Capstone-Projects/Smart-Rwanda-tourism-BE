@@ -1,4 +1,4 @@
-package com.smartrwanda.tourism.dto.response;
+package com.smartrwanda.tourism.dto;
 
 import lombok.Builder;
 import lombok.Getter;

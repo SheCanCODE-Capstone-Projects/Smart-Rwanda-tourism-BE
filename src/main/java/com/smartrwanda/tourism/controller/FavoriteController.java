@@ -1,8 +1,8 @@
 package com.smartrwanda.tourism.controller;
 
 import com.smartrwanda.tourism.common.ApiResponse;
-import com.smartrwanda.tourism.dto.request.FavoriteRequest;
-import com.smartrwanda.tourism.dto.response.FavoriteResponse;
+import com.smartrwanda.tourism.dto.FavoriteRequest;
+import com.smartrwanda.tourism.dto.FavoriteResponse;
 import com.smartrwanda.tourism.enums.ReviewTargetType;
 import com.smartrwanda.tourism.service.FavoriteService;
 import jakarta.validation.Valid;
