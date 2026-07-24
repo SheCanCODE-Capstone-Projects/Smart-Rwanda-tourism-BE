@@ -8,7 +8,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class TourismApplication {
 
     public static void main(String[] args) {
-
         Dotenv dotenv = Dotenv.configure()
                 .ignoreIfMissing()
                 .load();
