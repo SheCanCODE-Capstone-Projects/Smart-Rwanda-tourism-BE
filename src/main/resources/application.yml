@@ -61,4 +61,4 @@ logging:
 
 file:
   upload:
-    dir: ${FILE_UPLOAD_DIR:uploads/profiles/}
+    dir: uploads/profiles/
