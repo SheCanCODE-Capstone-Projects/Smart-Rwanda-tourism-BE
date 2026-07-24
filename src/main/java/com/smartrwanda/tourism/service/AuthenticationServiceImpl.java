@@ -1,9 +1,4 @@
-git commit -m "merge: resolve conflicts in feature/user-profile-management
-
-        - Resolve conflict in .idea/misc.xml (kept Java 17)
-        - Resolve conflict in UserMapper.java
-        - Resolve conflict in application.yml (removed hardcoded passwords)
-        - Move UserResponse.java from dto/response/ to dto/ package"package com.smartrwanda.tourism.service;
+package com.smartrwanda.tourism.service;
 
 import com.smartrwanda.tourism.dto.request.*;
 import com.smartrwanda.tourism.dto.response.AuthResponse;
@@ -20,6 +15,7 @@ import com.smartrwanda.tourism.repository.UserRepository;
 import com.smartrwanda.tourism.repository.UserProfileRepository;
 import com.smartrwanda.tourism.repository.UserPreferenceRepository;
 import com.smartrwanda.tourism.security.JwtService;
+import com.smartrwanda.tourism.service.AuthenticationService;
 import com.smartrwanda.tourism.validator.EmailValidator;
 import com.smartrwanda.tourism.validator.PasswordValidator;
 import lombok.RequiredArgsConstructor;
