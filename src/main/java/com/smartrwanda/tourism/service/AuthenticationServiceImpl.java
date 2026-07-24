@@ -1,13 +1,24 @@
-package com.smartrwanda.tourism.service;
+git commit -m "merge: resolve conflicts in feature/user-profile-management
 
-import com.smartrwanda.tourism.dto.*;
+        - Resolve conflict in .idea/misc.xml (kept Java 17)
+        - Resolve conflict in UserMapper.java
+        - Resolve conflict in application.yml (removed hardcoded passwords)
+        - Move UserResponse.java from dto/response/ to dto/ package"package com.smartrwanda.tourism.service;
+
+import com.smartrwanda.tourism.dto.request.*;
+import com.smartrwanda.tourism.dto.response.AuthResponse;
+import com.smartrwanda.tourism.dto.UserResponse;
 import com.smartrwanda.tourism.entity.AuthProvider;
 import com.smartrwanda.tourism.entity.PasswordResetToken;
 import com.smartrwanda.tourism.entity.User;
+import com.smartrwanda.tourism.entity.UserProfile;
+import com.smartrwanda.tourism.entity.UserPreference;
 import com.smartrwanda.tourism.exception.BadRequestException;
 import com.smartrwanda.tourism.exception.ResourceNotFoundException;
 import com.smartrwanda.tourism.repository.PasswordResetTokenRepository;
 import com.smartrwanda.tourism.repository.UserRepository;
+import com.smartrwanda.tourism.repository.UserProfileRepository;
+import com.smartrwanda.tourism.repository.UserPreferenceRepository;
 import com.smartrwanda.tourism.security.JwtService;
 import com.smartrwanda.tourism.validator.EmailValidator;
 import com.smartrwanda.tourism.validator.PasswordValidator;
@@ -20,12 +31,15 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.util.UUID;
+import org.springframework.security.core.context.SecurityContextHolder;
 
 @Service
 @RequiredArgsConstructor
 public class AuthenticationServiceImpl implements AuthenticationService {
 
     private final UserRepository userRepository;
+    private final UserProfileRepository userProfileRepository;
+    private final UserPreferenceRepository userPreferenceRepository;
     private final PasswordResetTokenRepository passwordResetTokenRepository;
     private final PasswordEncoder passwordEncoder;
     private final JwtService jwtService;
@@ -57,6 +71,15 @@ public class AuthenticationServiceImpl implements AuthenticationService {
 
         User savedUser = userRepository.save(user);
 
+        UserProfile profile = new UserProfile();
+        profile.setUserId(savedUser.getId());
+        profile.setFirstName(savedUser.getFirstName());
+        profile.setLastName(savedUser.getLastName());
+        userProfileRepository.save(profile);
+
+        UserPreference preferences = new UserPreference();
+        preferences.setUserId(savedUser.getId());
+        userPreferenceRepository.save(preferences);
 
         sendWelcomeEmail(savedUser.getEmail(), savedUser.getFirstName());
 
@@ -149,9 +172,20 @@ public class AuthenticationServiceImpl implements AuthenticationService {
 
     @Override
     public UserResponse getCurrentUser() {
-        throw new UnsupportedOperationException("Not yet implemented");
-    }
+        String email = SecurityContextHolder.getContext().getAuthentication().getName();
 
+        User user = userRepository.findByEmail(email)
+                .orElseThrow(() -> new ResourceNotFoundException("User not found"));
+
+        return UserResponse.builder()
+                .id(user.getId())
+                .firstName(user.getFirstName())
+                .lastName(user.getLastName())
+                .email(user.getEmail())
+                .role(user.getRole())
+                .createdAt(user.getCreatedAt())
+                .build();
+    }
 
 
     private void sendPasswordResetEmail(String to, String token) {
@@ -200,4 +234,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
             System.out.println(" Failed to send welcome email to: " + to + " - " + e.getMessage());
         }
     }
+
 }
+
+
