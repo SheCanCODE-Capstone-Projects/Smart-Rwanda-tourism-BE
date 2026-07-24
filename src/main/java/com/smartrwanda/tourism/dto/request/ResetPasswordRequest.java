@@ -1,4 +1,4 @@
-package com.smartrwanda.tourism.dto;
+package com.smartrwanda.tourism.dto.request;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
