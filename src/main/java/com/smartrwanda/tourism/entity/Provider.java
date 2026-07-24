@@ -57,7 +57,6 @@ public class Provider extends BaseEntity {
     @Column(name = "profile_picture_url")
     private String profilePictureUrl;
 
-    // Fields from the Admin/Reservation branch — kept for their features
     @Column(name = "logo_url")
     private String logoUrl;
 

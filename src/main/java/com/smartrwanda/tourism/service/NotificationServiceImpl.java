@@ -21,11 +21,10 @@ public class NotificationServiceImpl implements NotificationService {
     @Override
     @Transactional
     public void sendBookingRequestNotification(Reservation reservation) {
-
         Notification providerNotification = new Notification();
-        providerNotification.setProviderId(reservation.getProvider().getId());  // ✅ SET PROVIDER ID
+        providerNotification.setProviderId(reservation.getProvider().getId());
         providerNotification.setReservation(reservation);
-        providerNotification.setTitle(" New Booking Request");
+        providerNotification.setTitle("New Booking Request");
         providerNotification.setMessage(String.format(
                 "New booking request from %s for %s",
                 reservation.getGuestName(),
@@ -38,18 +37,17 @@ public class NotificationServiceImpl implements NotificationService {
         providerNotification.setIsRead(false);
         notificationRepository.save(providerNotification);
 
-        // Notification for User
         Notification userNotification = new Notification();
-        userNotification.setUserId(reservation.getUser().getId());  // ✅ SET USER ID
+        userNotification.setUserId(reservation.getUser().getId());
         userNotification.setReservation(reservation);
-        userNotification.setTitle("📋 Booking Request Sent");
+        userNotification.setTitle("Booking Request Sent");
         userNotification.setMessage(String.format(
                 "Your booking request to %s has been sent. Waiting for confirmation.",
                 reservation.getProvider().getBusinessName()
         ));
         userNotification.setType("BOOKING_REQUEST");
         userNotification.setActionUrl("/user/reservations/" + reservation.getId());
-        userNotification.setIcon("📋");
+        userNotification.setIcon("");
         userNotification.setTargetType("USER");
         userNotification.setIsRead(false);
         notificationRepository.save(userNotification);
@@ -58,34 +56,28 @@ public class NotificationServiceImpl implements NotificationService {
     @Override
     @Transactional
     public void sendBookingConfirmedNotification(Reservation reservation) {
-        // Notification for Provider
         Notification providerNotification = new Notification();
-        providerNotification.setProviderId(reservation.getProvider().getId());  // ✅ SET PROVIDER ID
+        providerNotification.setProviderId(reservation.getProvider().getId());
         providerNotification.setReservation(reservation);
-        providerNotification.setTitle("✅ Booking Confirmed");
+        providerNotification.setTitle("Booking Confirmed");
         providerNotification.setMessage(String.format(
-                "Booking from %s has been confirmed",
-                reservation.getGuestName()
-        ));
+                "Booking from %s has been confirmed", reservation.getGuestName()));
         providerNotification.setType("BOOKING_CONFIRMED");
         providerNotification.setActionUrl("/provider/reservations/" + reservation.getId());
-        providerNotification.setIcon("✅");
+        providerNotification.setIcon("");
         providerNotification.setTargetType("PROVIDER");
         providerNotification.setIsRead(false);
         notificationRepository.save(providerNotification);
 
-        // Notification for User
         Notification userNotification = new Notification();
-        userNotification.setUserId(reservation.getUser().getId());  // ✅ SET USER ID
+        userNotification.setUserId(reservation.getUser().getId());
         userNotification.setReservation(reservation);
-        userNotification.setTitle("✅ Booking Confirmed!");
+        userNotification.setTitle("Booking Confirmed!");
         userNotification.setMessage(String.format(
-                "Your booking at %s has been confirmed! 🎉",
-                reservation.getProvider().getBusinessName()
-        ));
+                "Your booking at %s has been confirmed!", reservation.getProvider().getBusinessName()));
         userNotification.setType("BOOKING_CONFIRMED");
         userNotification.setActionUrl("/user/reservations/" + reservation.getId());
-        userNotification.setIcon("✅");
+        userNotification.setIcon("");
         userNotification.setTargetType("USER");
         userNotification.setIsRead(false);
         notificationRepository.save(userNotification);
@@ -94,11 +86,10 @@ public class NotificationServiceImpl implements NotificationService {
     @Override
     @Transactional
     public void sendBookingRejectedNotification(Reservation reservation, String reason) {
-        // Notification for User
         Notification userNotification = new Notification();
-        userNotification.setUserId(reservation.getUser().getId());  // ✅ SET USER ID
+        userNotification.setUserId(reservation.getUser().getId());
         userNotification.setReservation(reservation);
-        userNotification.setTitle("❌ Booking Rejected");
+        userNotification.setTitle("Booking Rejected");
         userNotification.setMessage(String.format(
                 "Your booking at %s was rejected. Reason: %s",
                 reservation.getProvider().getBusinessName(),
@@ -106,7 +97,7 @@ public class NotificationServiceImpl implements NotificationService {
         ));
         userNotification.setType("BOOKING_REJECTED");
         userNotification.setActionUrl("/user/reservations/" + reservation.getId());
-        userNotification.setIcon("❌");
+        userNotification.setIcon("");
         userNotification.setTargetType("USER");
         userNotification.setIsRead(false);
         notificationRepository.save(userNotification);
@@ -115,11 +106,10 @@ public class NotificationServiceImpl implements NotificationService {
     @Override
     @Transactional
     public void sendBookingCancelledNotification(Reservation reservation, String reason) {
-        // Notification for User
         Notification userNotification = new Notification();
         userNotification.setUserId(reservation.getUser().getId());
         userNotification.setReservation(reservation);
-        userNotification.setTitle("⚠️ Booking Cancelled");
+        userNotification.setTitle("Booking Cancelled");
         userNotification.setMessage(String.format(
                 "Your booking at %s has been cancelled. Reason: %s",
                 reservation.getProvider().getBusinessName(),
@@ -127,7 +117,7 @@ public class NotificationServiceImpl implements NotificationService {
         ));
         userNotification.setType("BOOKING_CANCELLED");
         userNotification.setActionUrl("/user/reservations/" + reservation.getId());
-        userNotification.setIcon("⚠️");
+        userNotification.setIcon("");
         userNotification.setTargetType("USER");
         userNotification.setIsRead(false);
         notificationRepository.save(userNotification);
@@ -139,11 +129,11 @@ public class NotificationServiceImpl implements NotificationService {
         Notification notification = new Notification();
         notification.setUserId(userId);
         notification.setProviderId(providerId);
-        notification.setTitle(" New Message");
+        notification.setTitle("New Message");
         notification.setMessage(message.length() > 100 ? message.substring(0, 100) + "..." : message);
         notification.setType("NEW_MESSAGE");
         notification.setActionUrl("/messages/" + conversationId);
-        notification.setIcon(" ");
+        notification.setIcon("");
         notification.setTargetType("USER");
         notification.setIsRead(false);
         notificationRepository.save(notification);
@@ -152,33 +142,25 @@ public class NotificationServiceImpl implements NotificationService {
     @Override
     public List<NotificationResponse> getProviderNotifications(Long providerId) {
         return notificationRepository.findByProviderIdOrderByCreatedAtDesc(providerId)
-                .stream()
-                .map(this::mapToResponse)
-                .collect(Collectors.toList());
+                .stream().map(this::mapToResponse).collect(Collectors.toList());
     }
 
     @Override
     public List<NotificationResponse> getUserNotifications(Long userId) {
         return notificationRepository.findByUserIdOrderByCreatedAtDesc(userId)
-                .stream()
-                .map(this::mapToResponse)
-                .collect(Collectors.toList());
+                .stream().map(this::mapToResponse).collect(Collectors.toList());
     }
 
     @Override
     public List<NotificationResponse> getProviderUnreadNotifications(Long providerId) {
         return notificationRepository.findByProviderIdAndIsReadFalseOrderByCreatedAtDesc(providerId)
-                .stream()
-                .map(this::mapToResponse)
-                .collect(Collectors.toList());
+                .stream().map(this::mapToResponse).collect(Collectors.toList());
     }
 
     @Override
     public List<NotificationResponse> getUserUnreadNotifications(Long userId) {
         return notificationRepository.findByUserIdAndIsReadFalseOrderByCreatedAtDesc(userId)
-                .stream()
-                .map(this::mapToResponse)
-                .collect(Collectors.toList());
+                .stream().map(this::mapToResponse).collect(Collectors.toList());
     }
 
     @Override
@@ -194,12 +176,11 @@ public class NotificationServiceImpl implements NotificationService {
     @Override
     @Transactional
     public void markAsRead(Long notificationId) {
-        notificationRepository.findById(notificationId)
-                .ifPresent(notification -> {
-                    notification.setIsRead(true);
-                    notification.setReadAt(LocalDateTime.now());
-                    notificationRepository.save(notification);
-                });
+        notificationRepository.findById(notificationId).ifPresent(notification -> {
+            notification.setIsRead(true);
+            notification.setReadAt(LocalDateTime.now());
+            notificationRepository.save(notification);
+        });
     }
 
     @Override

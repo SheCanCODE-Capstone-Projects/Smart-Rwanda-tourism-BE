@@ -4,6 +4,12 @@ import com.smartrwanda.tourism.common.ApiResponse;
 import com.smartrwanda.tourism.dto.request.MessageRequest;
 import com.smartrwanda.tourism.dto.response.ConversationResponse;
 import com.smartrwanda.tourism.dto.response.MessageResponse;
+import com.smartrwanda.tourism.entity.Role;
+import com.smartrwanda.tourism.entity.User;
+import com.smartrwanda.tourism.exception.ResourceNotFoundException;
+import com.smartrwanda.tourism.repository.ProviderRepository;
+import com.smartrwanda.tourism.repository.UserRepository;
+import com.smartrwanda.tourism.security.JwtService;
 import com.smartrwanda.tourism.service.MessagingService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -19,6 +25,9 @@ import java.util.List;
 public class MessageController {
 
     private final MessagingService messagingService;
+    private final JwtService jwtService;
+    private final UserRepository userRepository;
+    private final ProviderRepository providerRepository;
 
     @PostMapping
     public ResponseEntity<ApiResponse<MessageResponse>> sendMessage(
@@ -66,21 +75,29 @@ public class MessageController {
             @RequestHeader("Authorization") String token) {
         String senderType = getSenderType(token);
         messagingService.markAllAsRead(conversationId, senderType);
-        return ResponseEntity.ok(ApiResponse.success("All messages marked as read", null));
+        return ResponseEntity.ok(ApiResponse.<Void>success("All messages marked as read", null));
+    }
+
+    private User resolveUser(String token) {
+        String bearer = token.startsWith("Bearer ") ? token.substring(7) : token;
+        String email = jwtService.extractEmail(bearer);
+        return userRepository.findByEmail(email)
+                .orElseThrow(() -> new ResourceNotFoundException("User not found"));
     }
 
     private Long getCurrentUserId(String token) {
-        // TODO: Extract userId from JWT token
-        return 1L;
+        return resolveUser(token).getId();
     }
 
     private Long getProviderId(String token) {
-        // TODO: Extract providerId from JWT token
-        return 1L;
+        User user = resolveUser(token);
+        return providerRepository.findByUserId(user.getId())
+                .orElseThrow(() -> new ResourceNotFoundException("Provider profile not found for this user"))
+                .getId();
     }
 
     private String getSenderType(String token) {
-        // TODO: Extract user role from JWT token
-        return "TOURIST";
+        User user = resolveUser(token);
+        return user.getRole() == Role.PROVIDER ? "PROVIDER" : "TOURIST";
     }
 }
