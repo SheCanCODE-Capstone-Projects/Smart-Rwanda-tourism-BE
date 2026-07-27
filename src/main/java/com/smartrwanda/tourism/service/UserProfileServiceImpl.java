@@ -12,6 +12,7 @@ import com.smartrwanda.tourism.repository.UserPreferenceRepository;
 import com.smartrwanda.tourism.repository.LoginHistoryRepository;
 import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
@@ -35,12 +36,13 @@ public class UserProfileServiceImpl implements UserProfileService {
     private final UserPreferenceRepository userPreferenceRepository;
     private final LoginHistoryRepository loginHistoryRepository;
 
-    private static final String UPLOAD_DIR = "uploads/profiles/";
+    @Value("${file.upload.dir}")
+    private String uploadDir;
 
     @PostConstruct
     public void init() {
         try {
-            Path uploadPath = Paths.get(UPLOAD_DIR);
+            Path uploadPath = Paths.get(uploadDir);
             if (!Files.exists(uploadPath)) {
                 Files.createDirectories(uploadPath);
                 System.out.println("Created upload directory: " + uploadPath.toAbsolutePath());
@@ -147,7 +149,7 @@ public class UserProfileServiceImpl implements UserProfileService {
                 throw new RuntimeException("File size exceeds " + (maxSize / (1024 * 1024)) + "MB limit. Got: " + file.getSize() + " bytes");
             }
 
-            Path uploadPath = Paths.get(UPLOAD_DIR);
+            Path uploadPath = Paths.get(uploadDir);
             if (!Files.exists(uploadPath)) {
                 Files.createDirectories(uploadPath);
             }
@@ -373,4 +375,3 @@ public class UserProfileServiceImpl implements UserProfileService {
         return response;
     }
 }
-
