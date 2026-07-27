@@ -74,9 +74,9 @@ public class UserProfileServiceImpl implements UserProfileService {
         if (request.getBio() != null) {
             profile.setBio(request.getBio());
         }
-        if (request.getDateOfBirth() != null && !request.getDateOfBirth().isEmpty()) {
-            profile.setDateOfBirth(LocalDate.parse(request.getDateOfBirth()));
-        }
+       // if (request.getDateOfBirth() != null && !request.getDateOfBirth().isEmpty()) {
+            //profile.setDateOfBirth(LocalDate.parse(request.getDateOfBirth()));
+       // }
         if (request.getAddress() != null) {
             profile.setAddress(request.getAddress());
         }
