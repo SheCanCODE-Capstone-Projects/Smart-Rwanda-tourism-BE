@@ -19,11 +19,14 @@ import com.smartrwanda.tourism.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
 @RequiredArgsConstructor
+@Transactional
 public class ReviewServiceImpl implements ReviewService {
 
     private final ReviewRepository reviewRepository;
@@ -214,7 +217,7 @@ public class ReviewServiceImpl implements ReviewService {
                 .comment(review.getComment())
                 .status(review.getStatus())
                 .helpfulCount(reviewHelpfulRepository.countByReviewId(review.getId()))
-                .imageUrls(review.getImageUrls())
+                .imageUrls(new ArrayList<>(review.getImageUrls()))
                 .createdAt(review.getCreatedAt())
                 .build();
     }
