@@ -12,6 +12,7 @@ import com.smartrwanda.tourism.exception.BadRequestException;
 import com.smartrwanda.tourism.exception.ResourceNotFoundException;
 import com.smartrwanda.tourism.repository.*;
 import com.smartrwanda.tourism.security.JwtService;
+import com.smartrwanda.tourism.service.AuthenticationService;
 import com.smartrwanda.tourism.validator.EmailValidator;
 import com.smartrwanda.tourism.validator.PasswordValidator;
 import lombok.RequiredArgsConstructor;
